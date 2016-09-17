@@ -11,6 +11,12 @@
 		01138E981D8CE84F00DD1748 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01138E961D8CE84F00DD1748 /* Main.storyboard */; };
 		01138E9A1D8CE84F00DD1748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01138E991D8CE84F00DD1748 /* Assets.xcassets */; };
 		01138E9D1D8CE84F00DD1748 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01138E9B1D8CE84F00DD1748 /* LaunchScreen.storyboard */; };
+		0122BAA61D8CFFEE001DE708 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0122BAA41D8CFFEE001DE708 /* UIColorExtensions.swift */; };
+		0122BAA71D8CFFEE001DE708 /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0122BAA51D8CFFEE001DE708 /* UIFontExtensions.swift */; };
+		0122BAAA1D8D0394001DE708 /* ShotCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0122BAA91D8D0394001DE708 /* ShotCollectionCell.swift */; };
+		01802ADA1D8CF9DC002AE659 /* ShotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01802AD91D8CF9DC002AE659 /* ShotsViewController.swift */; };
+		01802ADD1D8CFBD7002AE659 /* DribbbleShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01802ADB1D8CFBD7002AE659 /* DribbbleShot.swift */; };
+		01802ADE1D8CFBD7002AE659 /* DribbbleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01802ADC1D8CFBD7002AE659 /* DribbbleDataSource.swift */; };
 		199B6E6511412D9EE7707DFA /* Pods_Hoopy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98317C01E3664EEB5310F41 /* Pods_Hoopy.framework */; };
 /* End PBXBuildFile section */
 
@@ -21,6 +27,12 @@
 		01138E991D8CE84F00DD1748 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01138E9C1D8CE84F00DD1748 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01138E9E1D8CE84F00DD1748 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0122BAA41D8CFFEE001DE708 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		0122BAA51D8CFFEE001DE708 /* UIFontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtensions.swift; sourceTree = "<group>"; };
+		0122BAA91D8D0394001DE708 /* ShotCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCollectionCell.swift; sourceTree = "<group>"; };
+		01802AD91D8CF9DC002AE659 /* ShotsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsViewController.swift; sourceTree = "<group>"; };
+		01802ADB1D8CFBD7002AE659 /* DribbbleShot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DribbbleShot.swift; sourceTree = "<group>"; };
+		01802ADC1D8CFBD7002AE659 /* DribbbleDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DribbbleDataSource.swift; sourceTree = "<group>"; };
 		545D1A094ADDAF42910D9EF3 /* Pods-Hoopy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hoopy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hoopy/Pods-Hoopy.debug.xcconfig"; sourceTree = "<group>"; };
 		E41449779E047D7050B940DB /* Pods-Hoopy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hoopy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hoopy/Pods-Hoopy.release.xcconfig"; sourceTree = "<group>"; };
 		F98317C01E3664EEB5310F41 /* Pods_Hoopy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hoopy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,12 +72,50 @@
 			isa = PBXGroup;
 			children = (
 				01138E921D8CE84F00DD1748 /* AppDelegate.swift */,
+				0117E61B1D8E0916006A6266 /* View Controllers */,
+				0117E61C1D8E0923006A6266 /* View */,
+				0122BAA81D8CFFF2001DE708 /* Extensions */,
+				01802ADF1D8CFBDB002AE659 /* Models */,
 				01138E961D8CE84F00DD1748 /* Main.storyboard */,
-				01138E991D8CE84F00DD1748 /* Assets.xcassets */,
 				01138E9B1D8CE84F00DD1748 /* LaunchScreen.storyboard */,
+				01138E991D8CE84F00DD1748 /* Assets.xcassets */,
 				01138E9E1D8CE84F00DD1748 /* Info.plist */,
 			);
 			path = Hoopy;
+			sourceTree = "<group>";
+		};
+		0117E61B1D8E0916006A6266 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				01802AD91D8CF9DC002AE659 /* ShotsViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		0117E61C1D8E0923006A6266 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0122BAA91D8D0394001DE708 /* ShotCollectionCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		0122BAA81D8CFFF2001DE708 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0122BAA41D8CFFEE001DE708 /* UIColorExtensions.swift */,
+				0122BAA51D8CFFEE001DE708 /* UIFontExtensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		01802ADF1D8CFBDB002AE659 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				01802ADB1D8CFBD7002AE659 /* DribbbleShot.swift */,
+				01802ADC1D8CFBD7002AE659 /* DribbbleDataSource.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		AEB6FB9DABB66C2F5E53EA03 /* Frameworks */ = {
@@ -209,7 +259,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01802ADE1D8CFBD7002AE659 /* DribbbleDataSource.swift in Sources */,
+				0122BAAA1D8D0394001DE708 /* ShotCollectionCell.swift in Sources */,
+				01802ADA1D8CF9DC002AE659 /* ShotsViewController.swift in Sources */,
+				0122BAA71D8CFFEE001DE708 /* UIFontExtensions.swift in Sources */,
 				01138E931D8CE84F00DD1748 /* AppDelegate.swift in Sources */,
+				01802ADD1D8CFBD7002AE659 /* DribbbleShot.swift in Sources */,
+				0122BAA61D8CFFEE001DE708 /* UIColorExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
