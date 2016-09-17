@@ -1,0 +1,30 @@
+PODS:
+  - Alamofire (4.0.0)
+  - AlamofireImage (3.0.0):
+    - Alamofire (~> 4.0)
+  - FLAnimatedImage (1.0.12)
+  - FTIndicator (1.1.4):
+    - FTIndicator/FTNotificationIndicator (= 1.1.4)
+    - FTIndicator/FTNotificationIndicator (= 1.1.4)
+    - FTIndicator/FTProgressIndicator (= 1.1.4)
+  - FTIndicator/FTNotificationIndicator (1.1.4)
+  - FTIndicator/FTProgressIndicator (1.1.4)
+  - TUSafariActivity (1.0.4)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.0)
+  - AlamofireImage (~> 3.0)
+  - FLAnimatedImage (~> 1.0)
+  - FTIndicator
+  - TUSafariActivity (~> 1.0)
+
+SPEC CHECKSUMS:
+  Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
+  AlamofireImage: 6594aa1139a67dcd36cde6da79ea4e5b318e60fb
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  FTIndicator: 05f17450b2bba20fc2f9d4e17f7e47b43762c968
+  TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
+
+PODFILE CHECKSUM: 145888c4464b4ca8e24287f661b592281bae7f1d
+
+COCOAPODS: 1.0.1

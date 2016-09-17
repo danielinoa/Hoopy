@@ -11,6 +11,7 @@
 		01138E981D8CE84F00DD1748 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01138E961D8CE84F00DD1748 /* Main.storyboard */; };
 		01138E9A1D8CE84F00DD1748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01138E991D8CE84F00DD1748 /* Assets.xcassets */; };
 		01138E9D1D8CE84F00DD1748 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01138E9B1D8CE84F00DD1748 /* LaunchScreen.storyboard */; };
+		199B6E6511412D9EE7707DFA /* Pods_Hoopy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98317C01E3664EEB5310F41 /* Pods_Hoopy.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,9 @@
 		01138E991D8CE84F00DD1748 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01138E9C1D8CE84F00DD1748 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01138E9E1D8CE84F00DD1748 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		545D1A094ADDAF42910D9EF3 /* Pods-Hoopy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hoopy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hoopy/Pods-Hoopy.debug.xcconfig"; sourceTree = "<group>"; };
+		E41449779E047D7050B940DB /* Pods-Hoopy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hoopy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hoopy/Pods-Hoopy.release.xcconfig"; sourceTree = "<group>"; };
+		F98317C01E3664EEB5310F41 /* Pods_Hoopy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hoopy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				199B6E6511412D9EE7707DFA /* Pods_Hoopy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +43,8 @@
 			children = (
 				01138E911D8CE84F00DD1748 /* Hoopy */,
 				01138E901D8CE84F00DD1748 /* Products */,
+				C865863499FB2597D0F3D160 /* Pods */,
+				AEB6FB9DABB66C2F5E53EA03 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,6 +68,23 @@
 			path = Hoopy;
 			sourceTree = "<group>";
 		};
+		AEB6FB9DABB66C2F5E53EA03 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F98317C01E3664EEB5310F41 /* Pods_Hoopy.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C865863499FB2597D0F3D160 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				545D1A094ADDAF42910D9EF3 /* Pods-Hoopy.debug.xcconfig */,
+				E41449779E047D7050B940DB /* Pods-Hoopy.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -68,9 +92,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01138EA11D8CE84F00DD1748 /* Build configuration list for PBXNativeTarget "Hoopy" */;
 			buildPhases = (
+				37E2D568853D8237C9294507 /* [CP] Check Pods Manifest.lock */,
 				01138E8B1D8CE84F00DD1748 /* Sources */,
 				01138E8C1D8CE84F00DD1748 /* Frameworks */,
 				01138E8D1D8CE84F00DD1748 /* Resources */,
+				45DDF57F56A771D9E678AD04 /* [CP] Embed Pods Frameworks */,
+				2BA67D26224ECECA3CDBADDF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -129,6 +156,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2BA67D26224ECECA3CDBADDF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hoopy/Pods-Hoopy-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		37E2D568853D8237C9294507 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		45DDF57F56A771D9E678AD04 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hoopy/Pods-Hoopy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		01138E8B1D8CE84F00DD1748 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -178,6 +253,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -227,6 +303,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -253,7 +330,9 @@
 		};
 		01138EA21D8CE84F00DD1748 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 545D1A094ADDAF42910D9EF3 /* Pods-Hoopy.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = A8SJS26GGQ;
 				INFOPLIST_FILE = Hoopy/Info.plist;
@@ -266,7 +345,9 @@
 		};
 		01138EA31D8CE84F00DD1748 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E41449779E047D7050B940DB /* Pods-Hoopy.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = A8SJS26GGQ;
 				INFOPLIST_FILE = Hoopy/Info.plist;
