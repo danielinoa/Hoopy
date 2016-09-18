@@ -44,7 +44,7 @@ final class ShotsViewController: UICollectionViewController, UICollectionViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        layoutBarButtonItem.title = " ◉"
+        layoutBarButtonItem.title = "◉"
         layoutBarButtonItem.tintColor = UIColor(hexString: "#FF0080")
         collectionView?.refreshControl = refreshControl
         navigationItem.titleView = segmentedControl
