@@ -25,7 +25,8 @@ final class ShotCollectionCell: UICollectionViewCell {
         configure()
     }
     
-    private func configure() {
+    fileprivate func configure() {
+        backgroundColor = .black
         addSubview(imageView)
         addSubview(gifLabel)
     }
@@ -46,6 +47,7 @@ final class ShotCollectionCell: UICollectionViewCell {
         imageView.animationRepeatCount = 0
         imageView.animationDuration = Double.infinity
         imageView.startAnimating()
+        imageView.backgroundColor = .clear
         return imageView
     }()
     

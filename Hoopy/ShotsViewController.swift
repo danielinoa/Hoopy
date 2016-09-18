@@ -10,9 +10,9 @@ import UIKit
 
 final class ShotsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    @IBOutlet private weak var layoutBarButtonItem: UIBarButtonItem!
+    @IBOutlet fileprivate weak var layoutBarButtonItem: UIBarButtonItem!
     
-    private lazy var segmentedControl: UISegmentedControl = {
+    fileprivate lazy var segmentedControl: UISegmentedControl = {
         let items: [String] = DribbbleDataSource.Category.all.map { $0.rawValue }
         let control = UISegmentedControl(items: items)
         control.addTarget(self, action: #selector(segmentedControlChanged(_:)), for: .valueChanged)
@@ -22,7 +22,7 @@ final class ShotsViewController: UICollectionViewController, UICollectionViewDel
         return control
     }()
     
-    private lazy var refreshControl: UIRefreshControl = {
+    fileprivate lazy var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
         control.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         control.tintColor = .white
@@ -34,8 +34,8 @@ final class ShotsViewController: UICollectionViewController, UICollectionViewDel
     /**
      Refactor such that each category maps to a collection view and a data source
      */
-    private(set) var dataSource: DribbbleDataSource!
-    private let dataSources: [DribbbleDataSource] = {
+    fileprivate(set) var dataSource: DribbbleDataSource!
+    fileprivate let dataSources: [DribbbleDataSource] = {
         let categories = DribbbleDataSource.Category.all.map { DribbbleDataSource(category: $0) }
         return categories
     }()
@@ -60,29 +60,6 @@ final class ShotsViewController: UICollectionViewController, UICollectionViewDel
         })
     }
     
-    // MARK: - Layout
-    
-    private var numberOfCellsInRow = 3 {
-        didSet {
-            collectionView?.collectionViewLayout.invalidateLayout()
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let linesBetweenCells = numberOfCellsInRow - 1
-        var horizontalSpacing: CGFloat = 0
-        if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
-            horizontalSpacing = flowLayout.minimumInteritemSpacing
-        }
-        let dimension = (collectionView.bounds.width - horizontalSpacing * CGFloat(linesBetweenCells) ) / CGFloat(numberOfCellsInRow)
-        return CGSize(width: dimension, height: dimension)
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        collectionView?.collectionViewLayout.invalidateLayout()
-    }
-    
     // MARK: - Collection Data Source
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -93,7 +70,10 @@ final class ShotsViewController: UICollectionViewController, UICollectionViewDel
         guard let collectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: "shotCollectionCell", for: indexPath) as? ShotCollectionCell else {
             fatalError()
         }
-        collectionCell.configure(with: dataSource.shots[indexPath.row])
+        // Make sure the current row exists within the number of shots, in case the dataSource changes asynchronously.
+        if indexPath.row < dataSource.shots.count {
+            collectionCell.configure(with: dataSource.shots[indexPath.row])
+        }
         return collectionCell
     }
     
@@ -119,7 +99,7 @@ final class ShotsViewController: UICollectionViewController, UICollectionViewDel
     
     // MARK: - Refresh
     
-    @objc private func refresh(_ sender: AnyObject?) {
+    @objc fileprivate func refresh(_ sender: AnyObject?) {
         dataSource.reset()
         dataSource.loadCurrentPageOfShots { _ in
             DispatchQueue.main.async {
@@ -131,7 +111,7 @@ final class ShotsViewController: UICollectionViewController, UICollectionViewDel
     
     // MARK: - Categories
     
-    @objc private func segmentedControlChanged(_ control: UISegmentedControl) {
+    @objc fileprivate func segmentedControlChanged(_ control: UISegmentedControl) {
         guard segmentedControl == control else { return }
         dataSource = dataSources[segmentedControl.selectedSegmentIndex]
         DispatchQueue.main.async {
@@ -139,7 +119,28 @@ final class ShotsViewController: UICollectionViewController, UICollectionViewDel
         }
     }
     
-    // MARK: -
+    // MARK: - Layout
+    
+    fileprivate var numberOfCellsInRow = 3 {
+        didSet {
+            collectionView?.collectionViewLayout.invalidateLayout()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let linesBetweenCells = numberOfCellsInRow - 1
+        var horizontalSpacing: CGFloat = 0
+        if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
+            horizontalSpacing = flowLayout.minimumInteritemSpacing
+        }
+        let dimension = (collectionView.bounds.width - horizontalSpacing * CGFloat(linesBetweenCells) ) / CGFloat(numberOfCellsInRow)
+        return CGSize(width: dimension, height: dimension)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        collectionView?.collectionViewLayout.invalidateLayout()
+    }
     
     @IBAction func layoutBarButtonItemTapped(_ sender: AnyObject) {
         let alertController = UIAlertController(title: "Layout", message: "Number of shots per row", preferredStyle: .actionSheet)
@@ -158,6 +159,16 @@ final class ShotsViewController: UICollectionViewController, UICollectionViewDel
         alertController.addAction(action1)
         alertController.addAction(cancelAction)
         present(alertController, animated: true) {}
+    }
+    
+    // MARK: - Segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let shotViewController = segue.destination as? ShotViewController, let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first {
+            shotViewController.dribbbleShot = dataSource.shots[selectedIndexPath.row]
+            let placeholderImage = (collectionView?.cellForItem(at: selectedIndexPath) as? ShotCollectionCell)?.imageView.image
+            shotViewController.placeholderImage = placeholderImage
+        }
     }
     
 }

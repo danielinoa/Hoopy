@@ -11,11 +11,11 @@ import Alamofire
 
 final class DribbbleDataSource {
     
-    private let dribbbleAccessToken = "[DRIBBBLE_ACCESS_TOKEN]"
+    fileprivate let dribbbleAccessToken = "[DRIBBBLE_ACCESS_TOKEN]"
     
     // TODO: retrieve next page number based on LINK
-    private(set) var page = 1
-    private(set) var shots: [DribbbleShot] = []
+    fileprivate(set) var page = 1
+    fileprivate(set) var shots: [DribbbleShot] = []
     let category: Category
     
     init(category: Category) {
