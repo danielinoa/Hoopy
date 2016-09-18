@@ -25,6 +25,14 @@ To get started and run the app, you need to follow these simple steps:
 * This project is written in Swift 3.0 and requires Xcode 8 to build and run.
 * Hoopy runs on iOS 10+.
 
+## Dependencies
+
+* [Alamofire](https://github.com/Alamofire/Alamofire)
+* [AlamofireImage](https://github.com/Alamofire/AlamofireImage)
+* [FLAnimatedImage](https://github.com/Flipboard/FLAnimatedImage)
+* [TUSafariActivity](https://github.com/davbeck/TUSafariActivity)
+* [FTIndicator](https://github.com/liufengting/FTIndicator)
+
 ## Contributors
 
 * [Daniel Inoa](https://twitter.com/danielinoa_)
@@ -37,4 +45,4 @@ Please make your changes in a specific branch and request to pull into `master`.
 ## License
 
 Hoopy is under the MIT License.
-Any credit would be appreciated in case you release a derivative of Hoopy.
+(Any credit would be appreciated in case you release a derivative of Hoopy)
