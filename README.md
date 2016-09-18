@@ -4,6 +4,11 @@ which showcases the work of the most talented designers, illustrators and creati
 
 ![Screenshot](Screenshots/HoopyScreenshot.png)
 
+## Hoopy on the App Store
+
+<a href="https://itunes.apple.com/us/app/hoopy/id1148773237"><img src="https://github.com/danielinoa/Hoopy/blob/master/Screenshots/HoopyIcon.png" height="50"></a>
+<a href="https://itunes.apple.com/us/app/hoopy/id1148773237"><img src="http://i.imgur.com/DMdnDYq.png" height="50"></a>
+
 ## Getting Started
 
 To get started and run the app, you need to follow these simple steps:
@@ -19,11 +24,6 @@ To get started and run the app, you need to follow these simple steps:
 
 * This project is written in Swift 3.0 and requires Xcode 8 to build and run.
 * Hoopy runs on iOS 10+.
-
-## Hoopy on the App Store
-
-<a href="https://itunes.apple.com/us/app/hoopy/id1148773237"><img src="https://github.com/danielinoa/Hoopy/blob/master/Screenshots/HoopyIcon.png" height="50"></a>
-<a href="https://itunes.apple.com/us/app/hoopy/id1148773237"><img src="http://i.imgur.com/DMdnDYq.png" height="50"></a>
 
 ## Contributors
 
