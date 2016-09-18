@@ -22,6 +22,7 @@ To get started and run the app, you need to follow these simple steps:
 
 ## Hoopy on the App Store
 
+<a href="https://itunes.apple.com/us/app/hoopy/id1148773237"><img src="https://github.com/danielinoa/Hoopy/blob/master/Screenshots/HoopyIcon.png" height="50"></a>
 <a href="https://itunes.apple.com/us/app/hoopy/id1148773237"><img src="http://i.imgur.com/DMdnDYq.png" height="50"></a>
 
 ## Contributors
