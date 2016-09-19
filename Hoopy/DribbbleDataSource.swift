@@ -34,7 +34,7 @@ final class DribbbleDataSource {
             do {
                 let json = try JSONSerialization.jsonObject(with: response.data!, options: .allowFragments)
                 if let dictionariesArray = json as? [[String: Any]] {
-                    let shots: [DribbbleShot] = dictionariesArray.flatMap({ DribbbleShot(json: $0) })
+                    let shots: [DribbbleShot] = dictionariesArray.flatMap({ DribbbleShot(dictionary: $0) })
                     self.shots += shots
                     completion?(shots)
                 } else {

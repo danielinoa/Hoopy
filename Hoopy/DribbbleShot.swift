@@ -9,33 +9,66 @@
 import Foundation
 import Alamofire
 
-struct DribbbleShot: CustomDebugStringConvertible {
+struct DribbbleShot {
     
-    let title: String?
-    let description: String?
-    let author: String?
-    let url: String?
-    let avatarUrl: String?
-    let animated: Bool
-    
-    private let imagesUrl: [String:Any]
-    var highestResImageUrl: String? { return [hdImageUrl, imageUrl, teaserImageUrl].flatMap({ $0 }).first }
-    var imageUrl: String? { return imagesUrl["normal"] as? String }
-    var hdImageUrl: String? { return imagesUrl["hidpi"] as? String }
-    var teaserImageUrl: String? { return imagesUrl["teaser"] as? String }
+    fileprivate let dictionary: [String: Any?]
+    fileprivate let imagesUrl: [String: Any]
     
     // MARK: - Lifecycle
     
-    init?(json: [String:Any?]) {
-        guard let imagesUrl = json["images"] as? [String:AnyObject] else { return nil }
+    init?(dictionary: [String:Any?]) {
+        guard let imagesUrl = dictionary["images"] as? [String: Any] else { return nil }
+        self.dictionary = dictionary
         self.imagesUrl = imagesUrl
-        title = json["title"] as? String
-        description = json["description"] as? String
-        animated = (json["animated"] as? Int) == 1
-        author = (json["user"] as? [String:AnyObject])?["name"] as? String
-        avatarUrl = (json["user"] as? [String:AnyObject])?["avatar_url"] as? String
-        url = json["html_url"] as? String
     }
+    
+}
+
+extension DribbbleShot {
+    
+    var title: String? {
+        return dictionary["title"] as? String
+    }
+    
+    var description: String? {
+        return dictionary["description"] as? String
+    }
+    
+    
+    var author: String? {
+        return (dictionary["user"] as? [String:AnyObject])?["name"] as? String
+    }
+    
+    var url: String? {
+        return dictionary["html_url"] as? String
+    }
+    
+    var avatarUrl: String? {
+        return (dictionary["user"] as? [String:AnyObject])?["avatar_url"] as? String
+    }
+    
+    var animated: Bool {
+        return (dictionary["animated"] as? Int) == 1
+    }
+    
+    // MARK: - 
+    
+    var highestResImageUrl: String? { return [hdImageUrl, imageUrl, teaserImageUrl].flatMap({ $0 }).first }
+    
+    var imageUrl: String? {
+        return imagesUrl["normal"] as? String
+    }
+    var hdImageUrl: String? {
+        return imagesUrl["hidpi"] as? String
+    }
+    
+    var teaserImageUrl: String? {
+        return imagesUrl["teaser"] as? String
+    }
+    
+}
+
+extension DribbbleShot: CustomDebugStringConvertible {
     
     // MARK: - CustomDebugStringConvertible
     
@@ -44,4 +77,3 @@ struct DribbbleShot: CustomDebugStringConvertible {
     }
     
 }
-
