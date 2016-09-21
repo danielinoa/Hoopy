@@ -12,10 +12,10 @@
         <scene sceneID="410-7D-j06">
             <objects>
                 <collectionViewController id="kYG-pz-zEx" customClass="ShotsViewController" customModule="Hoopy" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="Pr9-h2-orz">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="Pr9-h2-orz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Y4d-Xf-l7m">
                             <size key="itemSize" width="167" height="132"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -30,7 +30,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="167" height="132"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </view>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <connections>
                                     <segue destination="ReW-13-pEq" kind="presentation" animates="NO" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="cSx-PZ-f6U"/>
                                 </connections>
@@ -43,19 +43,69 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="4Oz-hZ-C9g">
                         <nil key="title"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="tre-JM-Cvd"/>
                         <barButtonItem key="leftBarButtonItem" title="(layout)" id="5La-23-KRc">
                             <connections>
                                 <action selector="layoutBarButtonItemTapped:" destination="kYG-pz-zEx" id="GDb-DW-zyI"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="heart-filled" id="7vP-d6-wfb">
+                            <inset key="imageInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                            <connections>
+                                <segue destination="Gnm-4g-NbE" kind="show" id="6mj-AJ-jMX"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="favoritesBarButtonItem" destination="7vP-d6-wfb" id="F4h-ox-BSy"/>
                         <outlet property="layoutBarButtonItem" destination="5La-23-KRc" id="Q3Q-3h-Ogy"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0um-81-MOJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="343" y="448"/>
+            <point key="canvasLocation" x="382" y="448"/>
+        </scene>
+        <!--Favorites-->
+        <scene sceneID="cuP-7S-J1Q">
+            <objects>
+                <collectionViewController id="Gnm-4g-NbE" customClass="FavoritesViewController" customModule="Hoopy" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="ac6-EB-vRp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="1" green="0.31764705879999999" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="o9A-FX-VkF">
+                            <size key="itemSize" width="110" height="101"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="7" contentMode="center" reuseIdentifier="favoriteCollectionCell" id="gLb-Dd-zJ3" customClass="ShotCollectionCell" customModule="Hoopy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="110" height="101"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="110" height="101"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <segue destination="ReW-13-pEq" kind="presentation" animates="NO" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="etX-XA-FCo"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Gnm-4g-NbE" id="BBu-Aj-9hU"/>
+                            <outlet property="delegate" destination="Gnm-4g-NbE" id="gyv-QB-JvE"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Favorites" id="S3o-3C-LP8">
+                        <barButtonItem key="backBarButtonItem" title="test" id="Kzg-5b-9Qj"/>
+                    </navigationItem>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qcj-xy-Oac" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1468" y="164.16791604197903"/>
         </scene>
         <!--Shot View Controller-->
         <scene sceneID="4p5-Oh-m3d">
@@ -207,18 +257,45 @@
                                     <action selector="actionButtonTapped" destination="ReW-13-pEq" eventType="touchUpInside" id="0ke-U9-Xb4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ckd-Rb-dns" customClass="ExtendedHitButton" customModule="Hoopy" customModuleProvider="target">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="LbG-1O-eeV"/>
+                                    <constraint firstAttribute="width" constant="24" id="RGC-Ay-lPM"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="heart-filled"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="hitTestTopOffset">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="hitTestLeftOffset">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="hitTestBottomOffset">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="hitTestRightOffset">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="favoriteAction:" destination="ReW-13-pEq" eventType="touchUpInside" id="gi7-xM-C1z"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="5JW-7S-4px" firstAttribute="top" secondItem="jdW-Yb-1JK" secondAttribute="topMargin" id="5bq-qr-9DB"/>
+                            <constraint firstItem="tI3-10-v55" firstAttribute="top" secondItem="ckd-Rb-dns" secondAttribute="bottom" constant="12" id="6Hr-UA-Dmi"/>
                             <constraint firstItem="5JW-7S-4px" firstAttribute="top" secondItem="jdW-Yb-1JK" secondAttribute="topMargin" id="7mg-tg-s3D"/>
                             <constraint firstAttribute="trailing" secondItem="9eG-Lt-bJg" secondAttribute="trailing" id="7sO-tG-vc3"/>
-                            <constraint firstItem="tI3-10-v55" firstAttribute="top" secondItem="pL4-SB-zz9" secondAttribute="bottom" constant="12" id="8Ot-3x-44b"/>
+                            <constraint firstItem="tI3-10-v55" firstAttribute="top" secondItem="pL4-SB-zz9" secondAttribute="bottom" constant="14" id="8Ot-3x-44b"/>
                             <constraint firstItem="Dda-c3-7Xv" firstAttribute="height" secondItem="jdW-Yb-1JK" secondAttribute="height" id="LA4-IC-RYB"/>
                             <constraint firstItem="pL4-SB-zz9" firstAttribute="centerX" secondItem="jdW-Yb-1JK" secondAttribute="centerX" constant="5" id="QeU-ke-F1S"/>
                             <constraint firstItem="Dda-c3-7Xv" firstAttribute="width" secondItem="jdW-Yb-1JK" secondAttribute="width" id="QhR-Yv-FIN"/>
                             <constraint firstItem="9eG-Lt-bJg" firstAttribute="leading" secondItem="jdW-Yb-1JK" secondAttribute="leading" id="Rpt-E5-fwh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ckd-Rb-dns" secondAttribute="trailing" id="eIQ-Vk-At8"/>
                             <constraint firstAttribute="trailing" secondItem="5JW-7S-4px" secondAttribute="trailing" id="fHz-Dm-nKJ"/>
                             <constraint firstAttribute="bottomMargin" secondItem="5JW-7S-4px" secondAttribute="bottom" id="gfi-Mx-IuF"/>
                             <constraint firstAttribute="bottomMargin" secondItem="9eG-Lt-bJg" secondAttribute="bottom" id="odG-I1-VDS"/>
@@ -228,8 +305,8 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="zhp-OQ-UdI"/>
                                 <exclude reference="5bq-qr-9DB"/>
+                                <exclude reference="zhp-OQ-UdI"/>
                             </mask>
                         </variation>
                     </view>
@@ -238,6 +315,7 @@
                         <outlet property="actionButton" destination="pL4-SB-zz9" id="TjD-xk-H3I"/>
                         <outlet property="authorImageView" destination="TZt-57-Jrr" id="efx-9q-AV8"/>
                         <outlet property="authorLabel" destination="LoS-Fy-w0W" id="toU-g1-vYw"/>
+                        <outlet property="favoriteButton" destination="ckd-Rb-dns" id="U5B-id-dCv"/>
                         <outlet property="imageView" destination="6bm-fo-dpc" id="cwp-fk-hwp"/>
                         <outlet property="imageWrapperView" destination="Dda-c3-7Xv" id="sqB-o0-3xe"/>
                         <outlet property="progressView" destination="zIn-oh-dFx" id="f72-Ds-FiN"/>
@@ -248,7 +326,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fjh-Th-a31" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1177" y="448"/>
+            <point key="canvasLocation" x="1468" y="940"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VXJ-Co-Nqt">
@@ -270,5 +348,9 @@
     </scenes>
     <resources>
         <image name="action" width="50" height="50"/>
+        <image name="heart-filled" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="etX-XA-FCo"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -12,11 +12,12 @@ final class ShotsViewController: UICollectionViewController, UICollectionViewDel
     
     @IBOutlet fileprivate weak var layoutBarButtonItem: UIBarButtonItem!
     
+    @IBOutlet fileprivate weak var favoritesBarButtonItem: UIBarButtonItem!
+    
     fileprivate lazy var segmentedControl: UISegmentedControl = {
         let items: [String] = DribbbleDataSource.Category.all.map { $0.rawValue }
         let control = UISegmentedControl(items: items)
         control.addTarget(self, action: #selector(segmentedControlChanged(_:)), for: .valueChanged)
-        control.tintColor = UIColor(hexString: "#FF0080")
         let font = UIFont.systemFont(ofSize: 12).smallCaps
         control.setTitleTextAttributes([NSFontAttributeName: font], for: .normal)
         return control
@@ -25,11 +26,11 @@ final class ShotsViewController: UICollectionViewController, UICollectionViewDel
     fileprivate lazy var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
         control.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        control.tintColor = .white
+        control.tintColor = UIColor(hexString: "#FF0080")
         return control
     }()
     
-    // MARK: - DataSource
+    // MARK: - Data Source
     
     /**
      Refactor such that each category maps to a collection view and a data source
@@ -44,8 +45,8 @@ final class ShotsViewController: UICollectionViewController, UICollectionViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.tintColor = UIColor(hexString: "#FF0080")
         layoutBarButtonItem.title = "◉"
-        layoutBarButtonItem.tintColor = UIColor(hexString: "#FF0080")
         collectionView?.refreshControl = refreshControl
         navigationItem.titleView = segmentedControl
         segmentedControl.selectedSegmentIndex = 0

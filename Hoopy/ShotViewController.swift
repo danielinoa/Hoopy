@@ -12,6 +12,10 @@ import FLAnimatedImage
 import TUSafariActivity
 import FTIndicator
 
+protocol ShotViewControllerDelegate: class {
+    func shotViewController(shotViewController: ShotViewController, favoriteToggledShot: DribbbleShot)
+}
+
 final class ShotViewController: UIViewController {
 
     /*
@@ -34,10 +38,13 @@ final class ShotViewController: UIViewController {
     @IBOutlet fileprivate weak var authorLabel: UILabel!
     @IBOutlet fileprivate weak var authorImageView: UIImageView!
     @IBOutlet fileprivate weak var actionButton: UIButton!
+    @IBOutlet fileprivate weak var favoriteButton: UIButton!
     
-    var dribbbleShot: DribbbleShot?
+    var dribbbleShot: DribbbleShot!
     var placeholderImage: UIImage?
     fileprivate var image: UIImage?
+    
+    weak var delegate: ShotViewControllerDelegate?
     
     // MARK: - View Lifecycle
     
@@ -47,6 +54,7 @@ final class ShotViewController: UIViewController {
         imageWrapperView.addGestureRecognizer(tapGesture)
         imageView.addGestureRecognizer(doubleTapGesture)
         scrollView.delegate = self
+        configureFavoriteButton()
         configureShot()
     }
     
@@ -103,6 +111,11 @@ final class ShotViewController: UIViewController {
     
     }
     
+    fileprivate func configureFavoriteButton() {
+        let imageName = "heart-\(dribbbleShot.isFavorited ? "filled" : "empty")"
+        favoriteButton.setImage(UIImage(named: imageName), for: .normal)
+    }
+    
     // MARK: - Gestures
     
     fileprivate lazy var tapGesture: UITapGestureRecognizer = {
@@ -153,6 +166,17 @@ final class ShotViewController: UIViewController {
             }
             present(activityViewController, animated: true) {}
         }
+    }
+    
+    // change func name
+    @IBAction func favoriteAction(_ sender: AnyObject) {
+        if dribbbleShot.isFavorited {
+            DribbbleShot.remove(shot: dribbbleShot)
+        } else {
+            DribbbleShot.favorite(shot: dribbbleShot)
+        }
+        configureFavoriteButton()
+        delegate?.shotViewController(shotViewController: self, favoriteToggledShot: dribbbleShot)
     }
     
 }
