@@ -171,7 +171,7 @@ final class ShotViewController: UIViewController {
     // change func name
     @IBAction func favoriteAction(_ sender: AnyObject) {
         if dribbbleShot.isFavorited {
-            DribbbleShot.remove(shot: dribbbleShot)
+            let _ = DribbbleShot.remove(shot: dribbbleShot)
         } else {
             DribbbleShot.favorite(shot: dribbbleShot)
         }

@@ -12,8 +12,8 @@
         <scene sceneID="410-7D-j06">
             <objects>
                 <collectionViewController id="kYG-pz-zEx" customClass="ShotsViewController" customModule="Hoopy" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="Pr9-h2-orz">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="Pr9-h2-orz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Y4d-Xf-l7m">
@@ -24,7 +24,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="7" contentMode="center" reuseIdentifier="shotCollectionCell" id="Z9b-sj-E4J" customClass="ShotCollectionCell" customModule="Hoopy" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="167" height="132"/>
+                                <rect key="frame" x="77" y="0.0" width="167" height="132"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="167" height="132"/>
@@ -69,8 +69,8 @@
         <scene sceneID="cuP-7S-J1Q">
             <objects>
                 <collectionViewController id="Gnm-4g-NbE" customClass="FavoritesViewController" customModule="Hoopy" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="ac6-EB-vRp">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="ac6-EB-vRp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="1" green="0.31764705879999999" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -116,7 +116,7 @@
                         <viewControllerLayoutGuide type="bottom" id="tI3-10-v55"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jdW-Yb-1JK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5JW-7S-4px">
@@ -348,7 +348,7 @@
     </scenes>
     <resources>
         <image name="action" width="50" height="50"/>
-        <image name="heart-filled" width="50" height="50"/>
+        <image name="heart-filled" width="33" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="etX-XA-FCo"/>

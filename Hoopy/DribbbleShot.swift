@@ -95,43 +95,27 @@ extension DribbbleShot {
      Locally stores the specified shot in local collection of favorite shots.
      */
     static func favorite(shot: DribbbleShot) {
-        guard let shotID = shot.id else { return }
-        let defaults = UserDefaults.standard
-        var shots = loadFavoriteShots()
-        if !shots.isEmpty {
-            // check if shot already exists if so remove it and add new one
-            let oldIndex = shots.index(where: {
-                guard let id = $0.id else { return false }
-                return id == shotID
-            })
-            if let index = oldIndex {
-                shots.remove(at: Int(index))
-            }
-            let data = NSKeyedArchiver.archivedData(withRootObject: shots.map({ $0.dictionary }) + [shot.dictionary])
-            defaults.set(data, forKey: DribbbleShot.favoriteShotsKey)
-        } else {
-            let data = NSKeyedArchiver.archivedData(withRootObject: [shot.dictionary])
-            defaults.set(data, forKey: DribbbleShot.favoriteShotsKey)
-        }
+        let shots = remove(shot: shot) // remove shot if it already exists
+        let data = NSKeyedArchiver.archivedData(withRootObject: shots.map({ $0.dictionary }) + [shot.dictionary])
+        UserDefaults.standard.set(data, forKey: DribbbleShot.favoriteShotsKey)
     }
     
     /**
      Removes the specified from the local collection of favorite shots.
      */
-    static func remove(shot: DribbbleShot) {
-        guard let shotID = shot.id else { return }
-        let defaults = UserDefaults.standard
-        if let data = defaults.data(forKey: DribbbleShot.favoriteShotsKey),
-            var dictionaries = NSKeyedUnarchiver.unarchiveObject(with: data) as? [[String: Any]] {
-            let oldIndex = dictionaries.index(where: {
-                guard let id = $0["id"] as? Int else { return false }
-                return id == shotID
-            })
-            guard let index = oldIndex else { return }
-            dictionaries.remove(at: Int(index))
-            let data = NSKeyedArchiver.archivedData(withRootObject: dictionaries)
-            defaults.set(data, forKey: DribbbleShot.favoriteShotsKey)
+    static func remove(shot: DribbbleShot) -> [DribbbleShot] {
+        var shots = loadFavoriteShots()
+        guard let shotID = shot.id else { return shots }
+        let oldIndex = shots.index(where: {
+            guard let id = $0.id else { return false }
+            return id == shotID
+        })
+        if let index = oldIndex {
+            shots.remove(at: index)
+            let data = NSKeyedArchiver.archivedData(withRootObject: shots.map { $0.dictionary } )
+            UserDefaults.standard.set(data, forKey: DribbbleShot.favoriteShotsKey)
         }
+        return shots
     }
     
     /**
@@ -144,10 +128,9 @@ extension DribbbleShot {
     }
     
     var isFavorited: Bool {
-        guard let data = UserDefaults.standard.data(forKey: DribbbleShot.favoriteShotsKey) else { return false }
-        guard let dictionaries = NSKeyedUnarchiver.unarchiveObject(with: data) as? [[String: Any]] else { return false }
-        return dictionaries.contains(where: {
-            guard let retrievedID = $0["id"] as? Int, let id = self.id else { return false }
+        let shots = DribbbleShot.loadFavoriteShots()
+        return shots.contains(where: {
+            guard let retrievedID = $0.id, let id = self.id else { return false }
             return id == retrievedID
         })
     }
