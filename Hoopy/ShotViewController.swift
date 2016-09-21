@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 import Alamofire
 import FLAnimatedImage
 import TUSafariActivity
@@ -158,7 +159,7 @@ final class ShotViewController: UIViewController {
             activityViewController.excludedActivityTypes = [.assignToContact, .addToReadingList, .print]
             activityViewController.completionWithItemsHandler = { (activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
                 guard let activityType = activityType else { return }
-                if activityType == .saveToCameraRoll {
+                if activityType == .saveToCameraRoll && PHPhotoLibrary.authorizationStatus() == .authorized {
                     FTIndicator.showToastMessage("Image Saved!")
                 } else if activityType == .copyToPasteboard {
                     FTIndicator.showToastMessage("Copied!")
