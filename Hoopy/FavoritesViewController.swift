@@ -78,6 +78,13 @@ class FavoritesViewController: UICollectionViewController, UICollectionViewDeleg
         let dimension = (collectionView.bounds.width - horizontalSpacing * CGFloat(linesBetweenCells) ) / CGFloat(numberOfCellsInRow)
         return CGSize(width: dimension, height: dimension)
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if let collectionView = collectionView {
+            emptyShotsView.frame = collectionView.bounds
+        }
+    }
 
     // MARK: - Segue
     
