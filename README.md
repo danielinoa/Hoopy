@@ -2,7 +2,9 @@
 Hoopy is an open-source, lightweight and minimal Dribbble client, 
 which showcases the work of the most talented designers, illustrators and creatives in the design community.
 
-![Screenshot](Screenshots/HoopyScreenshot.png)
+<img src="https://github.com/danielinoa/Hoopy/blob/master/Screenshots/HoopySS1.jpg" height="450">
+<img src="https://github.com/danielinoa/Hoopy/blob/master/Screenshots/HoopySS2.jpg" height="450">
+<img src="https://github.com/danielinoa/Hoopy/blob/master/Screenshots/HoopySS3.jpg" height="450">
 
 ## Hoopy on the App Store
 
