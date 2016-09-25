@@ -27,7 +27,8 @@ final class DribbbleDataSource {
         let parameters: Parameters = [
             "access_token": dribbbleAccessToken,
             "page":"\(page)",
-            "list":"\(category.rawValue)"
+            "list":"\(category.rawValue)",
+            "sort":"\(ShotsSortCategory.defaultCategory)"
         ]
         let request = Alamofire.request("https://api.dribbble.com/v1/shots", parameters: parameters)
         request.responseJSON { response in

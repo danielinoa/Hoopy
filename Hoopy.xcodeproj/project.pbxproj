@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01009E011D9744F7007DA598 /* CollectionViewLayoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01009E001D9744F7007DA598 /* CollectionViewLayoutManager.swift */; };
 		01138E931D8CE84F00DD1748 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01138E921D8CE84F00DD1748 /* AppDelegate.swift */; };
 		01138E981D8CE84F00DD1748 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01138E961D8CE84F00DD1748 /* Main.storyboard */; };
 		01138E9A1D8CE84F00DD1748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01138E991D8CE84F00DD1748 /* Assets.xcassets */; };
@@ -19,6 +20,9 @@
 		0122BAA61D8CFFEE001DE708 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0122BAA41D8CFFEE001DE708 /* UIColorExtensions.swift */; };
 		0122BAA71D8CFFEE001DE708 /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0122BAA51D8CFFEE001DE708 /* UIFontExtensions.swift */; };
 		0122BAAA1D8D0394001DE708 /* ShotCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0122BAA91D8D0394001DE708 /* ShotCollectionCell.swift */; };
+		0146CA861D96DDE200059280 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0146CA851D96DDE200059280 /* SettingsViewController.swift */; };
+		0146CA881D96E1C700059280 /* VisualEffectContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0146CA871D96E1C700059280 /* VisualEffectContainerView.swift */; };
+		01721F321D97625A00F9DA81 /* ShotsSortCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01721F311D97625A00F9DA81 /* ShotsSortCategory.swift */; };
 		01802ADA1D8CF9DC002AE659 /* ShotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01802AD91D8CF9DC002AE659 /* ShotsViewController.swift */; };
 		01802ADD1D8CFBD7002AE659 /* DribbbleShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01802ADB1D8CFBD7002AE659 /* DribbbleShot.swift */; };
 		01802ADE1D8CFBD7002AE659 /* DribbbleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01802ADC1D8CFBD7002AE659 /* DribbbleDataSource.swift */; };
@@ -26,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01009E001D9744F7007DA598 /* CollectionViewLayoutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewLayoutManager.swift; sourceTree = "<group>"; };
 		01138E8F1D8CE84F00DD1748 /* Hoopy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hoopy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01138E921D8CE84F00DD1748 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01138E971D8CE84F00DD1748 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -40,6 +45,9 @@
 		0122BAA41D8CFFEE001DE708 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		0122BAA51D8CFFEE001DE708 /* UIFontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtensions.swift; sourceTree = "<group>"; };
 		0122BAA91D8D0394001DE708 /* ShotCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCollectionCell.swift; sourceTree = "<group>"; };
+		0146CA851D96DDE200059280 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		0146CA871D96E1C700059280 /* VisualEffectContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectContainerView.swift; sourceTree = "<group>"; };
+		01721F311D97625A00F9DA81 /* ShotsSortCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsSortCategory.swift; sourceTree = "<group>"; };
 		01802AD91D8CF9DC002AE659 /* ShotsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsViewController.swift; sourceTree = "<group>"; };
 		01802ADB1D8CFBD7002AE659 /* DribbbleShot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DribbbleShot.swift; sourceTree = "<group>"; };
 		01802ADC1D8CFBD7002AE659 /* DribbbleDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DribbbleDataSource.swift; sourceTree = "<group>"; };
@@ -100,6 +108,8 @@
 				01802AD91D8CF9DC002AE659 /* ShotsViewController.swift */,
 				0117E61D1D8E1052006A6266 /* ShotViewController.swift */,
 				011D4D0F1D90DB9B00CAC6F5 /* FavoritesViewController.swift */,
+				0146CA851D96DDE200059280 /* SettingsViewController.swift */,
+				01009E001D9744F7007DA598 /* CollectionViewLayoutManager.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -107,6 +117,7 @@
 		0117E61C1D8E0923006A6266 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0146CA871D96E1C700059280 /* VisualEffectContainerView.swift */,
 				0122BAA91D8D0394001DE708 /* ShotCollectionCell.swift */,
 				0117E61F1D8E2DD1006A6266 /* ExtendedHitButton.swift */,
 				011D4D151D9225A500CAC6F5 /* Empty Shots View */,
@@ -137,6 +148,7 @@
 			children = (
 				01802ADB1D8CFBD7002AE659 /* DribbbleShot.swift */,
 				01802ADC1D8CFBD7002AE659 /* DribbbleDataSource.swift */,
+				01721F311D97625A00F9DA81 /* ShotsSortCategory.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -285,15 +297,19 @@
 			files = (
 				0117E61E1D8E1052006A6266 /* ShotViewController.swift in Sources */,
 				01802ADE1D8CFBD7002AE659 /* DribbbleDataSource.swift in Sources */,
+				01009E011D9744F7007DA598 /* CollectionViewLayoutManager.swift in Sources */,
 				0122BAAA1D8D0394001DE708 /* ShotCollectionCell.swift in Sources */,
 				01802ADA1D8CF9DC002AE659 /* ShotsViewController.swift in Sources */,
 				0122BAA71D8CFFEE001DE708 /* UIFontExtensions.swift in Sources */,
 				0117E6201D8E2DD1006A6266 /* ExtendedHitButton.swift in Sources */,
 				01138E931D8CE84F00DD1748 /* AppDelegate.swift in Sources */,
 				01802ADD1D8CFBD7002AE659 /* DribbbleShot.swift in Sources */,
+				01721F321D97625A00F9DA81 /* ShotsSortCategory.swift in Sources */,
 				011D4D101D90DB9B00CAC6F5 /* FavoritesViewController.swift in Sources */,
 				0122BAA61D8CFFEE001DE708 /* UIColorExtensions.swift in Sources */,
 				011D4D141D9224F300CAC6F5 /* EmptyShotsView.swift in Sources */,
+				0146CA861D96DDE200059280 /* SettingsViewController.swift in Sources */,
+				0146CA881D96E1C700059280 /* VisualEffectContainerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

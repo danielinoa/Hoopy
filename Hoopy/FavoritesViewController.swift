@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoritesViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, ShotViewControllerDelegate {
+final class FavoritesViewController: UICollectionViewController, ShotViewControllerDelegate {
     
     fileprivate var shots: [DribbbleShot] = DribbbleShot.loadFavoriteShots().reversed() {
         didSet {
@@ -26,6 +26,12 @@ class FavoritesViewController: UICollectionViewController, UICollectionViewDeleg
     }()
     
     let emptyShotsView = EmptyShotsView.instanceFromNib()
+    
+    fileprivate var shotsLayoutManager: ShotsLayoutManager {
+        let manager = ShotsLayoutManager.shared
+        manager.addDelegate(delegate: self)
+        return manager
+    }
     
     // MARK: - 
     
@@ -47,7 +53,7 @@ class FavoritesViewController: UICollectionViewController, UICollectionViewDeleg
         }
     }
 
-    // MARK: UICollectionViewDataSource
+    // MARK: Collection Data Source
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return shots.count
@@ -61,23 +67,7 @@ class FavoritesViewController: UICollectionViewController, UICollectionViewDeleg
         return collectionCell
     }
     
-    // MARK: - Layout
-    
-    fileprivate var numberOfCellsInRow = 2 {
-        didSet {
-            collectionView?.collectionViewLayout.invalidateLayout()
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let linesBetweenCells = numberOfCellsInRow - 1
-        var horizontalSpacing: CGFloat = 0
-        if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
-            horizontalSpacing = flowLayout.minimumInteritemSpacing
-        }
-        let dimension = (collectionView.bounds.width - horizontalSpacing * CGFloat(linesBetweenCells) ) / CGFloat(numberOfCellsInRow)
-        return CGSize(width: dimension, height: dimension)
-    }
+    // MARK: - Collection Layout
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -103,4 +93,18 @@ class FavoritesViewController: UICollectionViewController, UICollectionViewDeleg
         shots = DribbbleShot.loadFavoriteShots().reversed()
     }
 
+}
+
+extension FavoritesViewController: UICollectionViewDelegateFlowLayout, ShotsLayoutManagerDelegate {
+    
+    // MARK: - Collection Layout & ShotsLayoutManagerDelegate
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return shotsLayoutManager.shotCollectionCellSize(in: collectionView, for: collectionViewLayout)
+    }
+    
+    func shotsLayoutManagerDidChangeLayout(manager: ShotsLayoutManager) {
+        collectionView?.collectionViewLayout.invalidateLayout()
+    }
+    
 }

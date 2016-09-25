@@ -8,10 +8,9 @@
 
 import UIKit
 
-final class ShotsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+final class ShotsViewController: UICollectionViewController {
     
     @IBOutlet fileprivate weak var layoutBarButtonItem: UIBarButtonItem!
-    
     @IBOutlet fileprivate weak var favoritesBarButtonItem: UIBarButtonItem!
     
     fileprivate lazy var segmentedControl: UISegmentedControl = {
@@ -30,6 +29,12 @@ final class ShotsViewController: UICollectionViewController, UICollectionViewDel
         return control
     }()
     
+    fileprivate var shotsLayoutManager: ShotsLayoutManager {
+        let manager = ShotsLayoutManager.shared
+        manager.addDelegate(delegate: self)
+        return manager
+    }
+    
     // MARK: - Data Source
     
     /**
@@ -41,24 +46,45 @@ final class ShotsViewController: UICollectionViewController, UICollectionViewDel
         return categories
     }()
     
-    // MARK: - View Lifecycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationController?.navigationBar.tintColor = UIColor(hexString: "#FF0080")
-        layoutBarButtonItem.title = "◉"
-        collectionView?.refreshControl = refreshControl
-        navigationItem.titleView = segmentedControl
-        segmentedControl.selectedSegmentIndex = 0
-        
-        dataSource = dataSources.first!
+    fileprivate func reloadDataSources() {
+        dataSource = dataSources[segmentedControl.selectedSegmentIndex]
         dataSources.forEach({ dataSource in
+            dataSource.reset()
             dataSource.loadCurrentPageOfShots(completion: { _ in
                 if self.dataSource === dataSource {
                     DispatchQueue.main.async { self.collectionView?.reloadData() }
                 }
             })
         })
+    }
+    
+    // MARK: - Lifecycle
+    
+    deinit {
+        UserDefaults.standard.removeObserver(self, forKeyPath: ShotsSortCategory.defaultCategoryKey)
+    }
+    
+    // MARK: - View Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        UserDefaults.standard.addObserver(self, forKeyPath: ShotsSortCategory.defaultCategoryKey, options: [.new], context: nil)
+        shotsLayoutManager.addDelegate(delegate: self)
+        navigationController?.navigationBar.tintColor = UIColor(hexString: "#FF0080")
+        layoutBarButtonItem.title = "◉"
+        collectionView?.refreshControl = refreshControl
+        navigationItem.titleView = segmentedControl
+        segmentedControl.selectedSegmentIndex = 0
+        reloadDataSources()
+    }
+    
+    // MARK: - KVO
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        // FIXME: This is being called twice.  ¯\_(ツ)_/¯
+        if keyPath == ShotsSortCategory.defaultCategoryKey {
+            reloadDataSources()
+        }
     }
     
     // MARK: - Collection Data Source
@@ -120,47 +146,6 @@ final class ShotsViewController: UICollectionViewController, UICollectionViewDel
         }
     }
     
-    // MARK: - Layout
-    
-    fileprivate var numberOfCellsInRow = 3 {
-        didSet {
-            collectionView?.collectionViewLayout.invalidateLayout()
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let linesBetweenCells = numberOfCellsInRow - 1
-        var horizontalSpacing: CGFloat = 0
-        if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
-            horizontalSpacing = flowLayout.minimumInteritemSpacing
-        }
-        let dimension = (collectionView.bounds.width - horizontalSpacing * CGFloat(linesBetweenCells) ) / CGFloat(numberOfCellsInRow)
-        return CGSize(width: dimension, height: dimension)
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        collectionView?.collectionViewLayout.invalidateLayout()
-    }
-    
-    @IBAction func layoutBarButtonItemTapped(_ sender: AnyObject) {
-        let alertController = UIAlertController(title: "Layout", message: "Number of shots per row", preferredStyle: .actionSheet)
-        let action2 = UIAlertAction(title: "2 shots", style: .default) { _ in
-            self.numberOfCellsInRow = 2
-        }
-        let action3 = UIAlertAction(title: "3 shots", style: .default) { _ in
-            self.numberOfCellsInRow = 3
-        }
-        let action1 = UIAlertAction(title: "4 shots", style: .default) { _ in
-            self.numberOfCellsInRow = 4
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alertController.addAction(action2)
-        alertController.addAction(action3)
-        alertController.addAction(action1)
-        alertController.addAction(cancelAction)
-        present(alertController, animated: true) {}
-    }
     
     // MARK: - Segue
     
@@ -170,6 +155,22 @@ final class ShotsViewController: UICollectionViewController, UICollectionViewDel
             let placeholderImage = (collectionView?.cellForItem(at: selectedIndexPath) as? ShotCollectionCell)?.imageView.image
             shotViewController.placeholderImage = placeholderImage
         }
+    }
+    
+    
+    
+}
+
+extension ShotsViewController: UICollectionViewDelegateFlowLayout, ShotsLayoutManagerDelegate {
+    
+    // MARK: - Collection Layout & ShotsLayoutManagerDelegate
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return shotsLayoutManager.shotCollectionCellSize(in: collectionView, for: collectionViewLayout)
+    }
+    
+    func shotsLayoutManagerDidChangeLayout(manager: ShotsLayoutManager) {
+        collectionView?.collectionViewLayout.invalidateLayout()
     }
     
 }
