@@ -57,6 +57,7 @@ final class ShotViewController: UIViewController {
         scrollView.delegate = self
         configureFavoriteButton()
         configureShot()
+        modalPresentationCapturesStatusBarAppearance = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -169,7 +170,6 @@ final class ShotViewController: UIViewController {
         }
     }
     
-    // change func name
     @IBAction func favoriteAction(_ sender: AnyObject) {
         if dribbbleShot.isFavorited {
             let _ = DribbbleShot.remove(shot: dribbbleShot)
@@ -178,6 +178,12 @@ final class ShotViewController: UIViewController {
         }
         configureFavoriteButton()
         delegate?.shotViewController(shotViewController: self, favoriteToggledShot: dribbbleShot)
+    }
+    
+    // MARK: - Status Bar Style
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
 }
