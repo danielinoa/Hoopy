@@ -59,7 +59,7 @@ final class SettingsViewController: UIViewController, UIGestureRecognizerDelegat
         }
         
         view.setNeedsUpdateConstraints()
-        UIView.animate(withDuration: 0.25, animations: {
+        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
             self.view.layoutIfNeeded()
             self.view.backgroundColor = flag ? UIColor.black.withAlphaComponent(0.35) : .clear
         }) { _ in
