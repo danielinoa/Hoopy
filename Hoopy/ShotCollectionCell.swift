@@ -11,6 +11,10 @@ import AlamofireImage
 
 final class ShotCollectionCell: UICollectionViewCell {
     
+    static let reuseIdentifier = "shotCollectionCell"
+    
+    // MARK: - Lifecycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -27,9 +31,12 @@ final class ShotCollectionCell: UICollectionViewCell {
     
     fileprivate func configure() {
         backgroundColor = .black
+        clipsToBounds = true
         addSubview(imageView)
         addSubview(gifLabel)
     }
+    
+    // MARK: - Configure
     
     func configure(with shot: DribbbleShot) {
         gifLabel.isHidden = !shot.animated

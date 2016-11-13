@@ -27,7 +27,7 @@ final class ShotViewController: UIViewController {
      WORKAROUND:
      In order to properly animate the VisualEffectView's blur, the effectView alpha value is zeroed
      when the view loads. Once the view has appeared the alpha value is brought back to 1 with an animation.
-     To prevent a transition delay, the segue is set to not animate (through IB).
+     To prevent a transition delay, the presentation must be set to not animate.
      */
     
     @IBOutlet fileprivate weak var visualEffectView: UIVisualEffectView!
@@ -41,17 +41,27 @@ final class ShotViewController: UIViewController {
     @IBOutlet fileprivate weak var actionButton: UIButton!
     @IBOutlet fileprivate weak var favoriteButton: UIButton!
     
-    var dribbbleShot: DribbbleShot!
-    var placeholderImage: UIImage?
+    let dribbbleShot: DribbbleShot
+    let placeholderImage: UIImage?
     fileprivate var image: UIImage?
     
     weak var delegate: ShotViewControllerDelegate?
+    
+    // MARK: - Lifecycle
+    
+    init(shot: DribbbleShot, placeholderImage: UIImage? = nil) {
+        self.dribbbleShot = shot
+        self.placeholderImage = placeholderImage
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) { fatalError("\(#function) has not been implemented") }
+    required init?(coder aDecoder: NSCoder) { fatalError("\(#function) has not been implemented") }
     
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        assert(dribbbleShot != nil, "Expects `dribbbleShot` to be set when view loads")
         imageWrapperView.addGestureRecognizer(tapGesture)
         imageView.addGestureRecognizer(doubleTapGesture)
         scrollView.delegate = self
@@ -80,24 +90,24 @@ final class ShotViewController: UIViewController {
     // MARK: -
     
     fileprivate func configureShot() {
-        titleLabel.text = dribbbleShot?.title ?? ""
-        authorLabel.text = dribbbleShot?.author ?? ""
+        titleLabel.text = dribbbleShot.title
+        authorLabel.text = dribbbleShot.author
         imageView.image = placeholderImage
         
         // Retrieves author image
-        if let avatarUrlString = dribbbleShot?.avatarUrl, let avatarUrl = URL(string: avatarUrlString) {
+        if let avatarUrlString = dribbbleShot.avatarUrl, let avatarUrl = URL(string: avatarUrlString) {
             authorImageView.image = nil
             authorImageView.af_setImage(withURL: avatarUrl)
         }
         
         // Retrieves shot
-        if let dribbbleShot = dribbbleShot, let hdImageUrlPath = dribbbleShot.highestResImageUrl {
+        if let hdImageUrlPath = dribbbleShot.highestResImageUrl {
             let request = Alamofire.request(hdImageUrlPath)
             request.responseJSON { response in
                 DispatchQueue.main.async {
                     if let data = response.data {
                         UIView.animate(withDuration: 0.5) { self.progressView.alpha = 0 }
-                        if dribbbleShot.animated {
+                        if self.dribbbleShot.animated {
                             self.imageView.animatedImage = FLAnimatedImage(gifData: data)
                         } else {
                             self.imageView.image = UIImage(data: data)
@@ -154,7 +164,7 @@ final class ShotViewController: UIViewController {
     // MARK: - IBActions
     
     @IBAction fileprivate func actionButtonTapped() {
-        if let dribbbleShot = dribbbleShot, let urlPath = dribbbleShot.url, let url = NSURL(string: urlPath), let image = imageView.image {
+        if let urlPath = dribbbleShot.url, let url = NSURL(string: urlPath), let image = imageView.image {
             let safariActivity = TUSafariActivity()
             let activityViewController = UIActivityViewController(activityItems: [image, url], applicationActivities: [safariActivity])
             activityViewController.excludedActivityTypes = [.assignToContact, .addToReadingList, .print]

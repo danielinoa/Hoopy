@@ -10,8 +10,17 @@ import UIKit
 
 final class ShotsViewController: UICollectionViewController {
     
-    @IBOutlet fileprivate weak var layoutBarButtonItem: UIBarButtonItem!
-    @IBOutlet fileprivate weak var favoritesBarButtonItem: UIBarButtonItem!
+    private lazy var favoritesBarButtonItem: UIBarButtonItem = {
+        let heartImage = UIImage(named: "heart-filled")
+        let item = UIBarButtonItem(image: heartImage, style: .plain, target: self, action: #selector(favoritesBarButtonTapped))
+        item.imageInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+        return item
+    }()
+    
+    private lazy var settingsBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem.init(title: "◉", style: .plain, target: self, action: #selector(settingsBarButtonTapped))
+        return item
+    }()
     
     fileprivate lazy var segmentedControl: UISegmentedControl = {
         let items: [String] = DribbbleDataSource.Category.all.map { $0.rawValue }
@@ -60,6 +69,13 @@ final class ShotsViewController: UICollectionViewController {
     
     // MARK: - Lifecycle
     
+    convenience init() {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        self.init(collectionViewLayout: layout)
+    }
+    
     deinit {
         UserDefaults.standard.removeObserver(self, forKeyPath: ShotsSortCategory.defaultCategoryKey)
     }
@@ -68,14 +84,33 @@ final class ShotsViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserDefaults.standard.addObserver(self, forKeyPath: ShotsSortCategory.defaultCategoryKey, options: [.new], context: nil)
-        shotsLayoutManager.addDelegate(delegate: self)
-        navigationController?.navigationBar.tintColor = UIColor(hexString: "#FF0080")
-        layoutBarButtonItem.title = "◉"
+        
+        collectionView?.backgroundColor = .white
+        collectionView?.register(ShotCollectionCell.self, forCellWithReuseIdentifier: ShotCollectionCell.reuseIdentifier)
         collectionView?.refreshControl = refreshControl
+        
+        navigationItem.leftBarButtonItem = settingsBarButtonItem
+        navigationItem.rightBarButtonItem = favoritesBarButtonItem
         navigationItem.titleView = segmentedControl
         segmentedControl.selectedSegmentIndex = 0
+        
+        UserDefaults.standard.addObserver(self, forKeyPath: ShotsSortCategory.defaultCategoryKey, options: [.new], context: nil)
+        shotsLayoutManager.addDelegate(delegate: self)
+        
         reloadDataSources()
+    }
+    
+    // MARK: -
+    
+    @objc private func favoritesBarButtonTapped() {
+        let favoritesViewController = FavoritesViewController()
+        show(favoritesViewController, sender: nil)
+    }
+    
+    @objc private func settingsBarButtonTapped() {
+        let settingsViewController = SettingsViewController()
+        settingsViewController.modalPresentationStyle = .overCurrentContext
+        present(settingsViewController, animated: false, completion: nil)
     }
     
     // MARK: - KVO
@@ -90,16 +125,17 @@ final class ShotsViewController: UICollectionViewController {
     // MARK: - Collection Data Source
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.shots.count
+        return dataSource?.shots.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let collectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: "shotCollectionCell", for: indexPath) as? ShotCollectionCell else {
+        guard let collectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: ShotCollectionCell.reuseIdentifier, for: indexPath) as? ShotCollectionCell else {
             fatalError()
         }
         // Make sure the current row exists within the number of shots, in case the dataSource changes asynchronously.
         if indexPath.row < dataSource.shots.count {
-            collectionCell.configure(with: dataSource.shots[indexPath.row])
+            let shot = dataSource.shots[indexPath.row]
+            collectionCell.configure(with: shot)
         }
         return collectionCell
     }
@@ -124,6 +160,16 @@ final class ShotsViewController: UICollectionViewController {
         }
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let shot = dataSource.shots[indexPath.row]
+        let placeholderImage = (collectionView.cellForItem(at: indexPath) as? ShotCollectionCell)?.imageView.image
+        
+        let shotViewController = ShotViewController(shot: shot, placeholderImage: placeholderImage)
+        shotViewController.modalPresentationStyle = .overCurrentContext
+        
+        present(shotViewController, animated: false, completion: nil)
+    }
+    
     // MARK: - Refresh
     
     @objc fileprivate func refresh(_ sender: AnyObject?) {
@@ -145,19 +191,6 @@ final class ShotsViewController: UICollectionViewController {
             self.collectionView?.reloadData()
         }
     }
-    
-    
-    // MARK: - Segue
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let shotViewController = segue.destination as? ShotViewController, let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first {
-            shotViewController.dribbbleShot = dataSource.shots[selectedIndexPath.row]
-            let placeholderImage = (collectionView?.cellForItem(at: selectedIndexPath) as? ShotCollectionCell)?.imageView.image
-            shotViewController.placeholderImage = placeholderImage
-        }
-    }
-    
-    
     
 }
 

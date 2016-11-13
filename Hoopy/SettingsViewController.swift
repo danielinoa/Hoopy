@@ -12,12 +12,13 @@ final class SettingsViewController: UIViewController, UIGestureRecognizerDelegat
     
     @IBOutlet fileprivate var bottomToBottomConstraint: NSLayoutConstraint!
     @IBOutlet fileprivate var topToBottomConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate var tapGesture: UITapGestureRecognizer!
     
     @IBOutlet weak fileprivate var sortShotsLabel: UILabel!
     @IBOutlet weak fileprivate var layoutShotsLabel: UILabel!
     @IBOutlet weak fileprivate var sortSegmentedControl: UISegmentedControl!
     @IBOutlet weak fileprivate var layoutSegmentedControl: UISegmentedControl!
+    
+    private lazy var tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped(_:)))
     
     fileprivate var shotsLayoutManager = ShotsLayoutManager.shared
     
@@ -27,7 +28,8 @@ final class SettingsViewController: UIViewController, UIGestureRecognizerDelegat
         super.viewDidLoad()
         
         view.backgroundColor = .clear
-        view.addGestureRecognizer(tapGesture)
+        view.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.delegate = self
         
         layoutSegmentedControl.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 12).smallCaps], for: .normal)
         sortSegmentedControl.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 12).smallCaps], for: .normal)
@@ -67,7 +69,7 @@ final class SettingsViewController: UIViewController, UIGestureRecognizerDelegat
         }
     }
     
-    @IBAction fileprivate func tapped(_ sender: UITapGestureRecognizer) {
+    @objc fileprivate func tapped(_ sender: UITapGestureRecognizer) {
         setSettingsViewVisible(flag: false) { 
             self.dismiss(animated: true, completion: {})
         }
@@ -76,7 +78,7 @@ final class SettingsViewController: UIViewController, UIGestureRecognizerDelegat
     // MARK: - UIGestureRecognizerDelegate
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        return (gestureRecognizer == tapGesture && touch.view == view)
+        return (gestureRecognizer == tapGestureRecognizer && touch.view == view)
     }
     
     // MARK: -

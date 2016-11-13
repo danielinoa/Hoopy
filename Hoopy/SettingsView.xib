@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController" customModule="Hoopy" customModuleProvider="target">
+            <connections>
+                <outlet property="bottomToBottomConstraint" destination="gwN-tc-j6V" id="LaP-6j-DOm"/>
+                <outlet property="layoutSegmentedControl" destination="z2c-dH-xDi" id="Iqq-wT-V16"/>
+                <outlet property="layoutShotsLabel" destination="3gG-8B-ST7" id="xGm-uE-6ml"/>
+                <outlet property="sortSegmentedControl" destination="3b6-GO-5Yg" id="jM3-1M-OLo"/>
+                <outlet property="sortShotsLabel" destination="4HC-Ec-qiT" id="297-2X-wb8"/>
+                <outlet property="topToBottomConstraint" destination="Pcz-Z6-g2O" id="ajn-6M-UUV"/>
+                <outlet property="view" destination="DQ6-MA-xtZ" id="kbW-f2-6o4"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="DQ6-MA-xtZ">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XpB-fs-MRd" customClass="VisualEffectContainerView" customModule="Hoopy" customModuleProvider="target">
+                    <rect key="frame" x="10" y="446" width="355" height="214"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="shots" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4HC-Ec-qiT">
+                            <rect key="frame" x="157" y="15" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3b6-GO-5Yg">
+                            <rect key="frame" x="86.5" y="51" width="183" height="29"/>
+                            <segments>
+                                <segment title="recent"/>
+                                <segment title="most viewed"/>
+                            </segments>
+                            <connections>
+                                <action selector="sortSegmentedControlChangedValue:" destination="-1" eventType="valueChanged" id="Ol1-9D-KHh"/>
+                            </connections>
+                        </segmentedControl>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iNg-2e-OI3" userLabel="Rule View">
+                            <rect key="frame" x="0.0" y="99" width="355" height="1"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="Q0y-FK-bic"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="layout" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gG-8B-ST7">
+                            <rect key="frame" x="154.5" y="115" width="47" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="z2c-dH-xDi">
+                            <rect key="frame" x="20" y="170" width="315" height="29"/>
+                            <segments>
+                                <segment title="2 shots"/>
+                                <segment title="3 shots"/>
+                                <segment title="4 shots"/>
+                            </segments>
+                            <connections>
+                                <action selector="layoutSegmentedControlChangedValue:" destination="-1" eventType="valueChanged" id="GhG-If-k4X"/>
+                            </connections>
+                        </segmentedControl>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of shots per row" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3dA-kw-pfA">
+                            <rect key="frame" x="107.5" y="140" width="141" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="z2c-dH-xDi" firstAttribute="top" secondItem="3dA-kw-pfA" secondAttribute="bottom" constant="15" id="0sB-rF-htk"/>
+                        <constraint firstAttribute="trailing" secondItem="iNg-2e-OI3" secondAttribute="trailing" id="AKr-F2-Qhx"/>
+                        <constraint firstItem="z2c-dH-xDi" firstAttribute="leading" secondItem="XpB-fs-MRd" secondAttribute="leading" constant="20" id="FBw-Q9-o67"/>
+                        <constraint firstItem="3b6-GO-5Yg" firstAttribute="centerX" secondItem="4HC-Ec-qiT" secondAttribute="centerX" id="GEl-aL-zI7"/>
+                        <constraint firstItem="4HC-Ec-qiT" firstAttribute="centerX" secondItem="XpB-fs-MRd" secondAttribute="centerX" id="UeD-Nu-g5v"/>
+                        <constraint firstItem="4HC-Ec-qiT" firstAttribute="top" secondItem="XpB-fs-MRd" secondAttribute="top" constant="15" id="W8e-pR-M8U"/>
+                        <constraint firstItem="iNg-2e-OI3" firstAttribute="top" secondItem="3b6-GO-5Yg" secondAttribute="bottom" constant="20" id="aIk-hQ-3CX"/>
+                        <constraint firstItem="3b6-GO-5Yg" firstAttribute="top" secondItem="4HC-Ec-qiT" secondAttribute="bottom" constant="15" id="hmC-Xu-eVz"/>
+                        <constraint firstAttribute="trailing" secondItem="z2c-dH-xDi" secondAttribute="trailing" constant="20" id="iy0-Ah-vxx"/>
+                        <constraint firstAttribute="bottom" secondItem="z2c-dH-xDi" secondAttribute="bottom" constant="20" id="lZh-Yw-S5A"/>
+                        <constraint firstItem="3dA-kw-pfA" firstAttribute="top" secondItem="3gG-8B-ST7" secondAttribute="bottom" constant="4" id="ljm-dG-fIj"/>
+                        <constraint firstItem="3gG-8B-ST7" firstAttribute="centerX" secondItem="3b6-GO-5Yg" secondAttribute="centerX" id="ogx-iX-3l9"/>
+                        <constraint firstItem="3gG-8B-ST7" firstAttribute="top" secondItem="iNg-2e-OI3" secondAttribute="bottom" constant="15" id="qeg-Or-k99"/>
+                        <constraint firstItem="iNg-2e-OI3" firstAttribute="leading" secondItem="XpB-fs-MRd" secondAttribute="leading" id="taq-7N-rdG"/>
+                        <constraint firstItem="3dA-kw-pfA" firstAttribute="centerX" secondItem="3gG-8B-ST7" secondAttribute="centerX" id="uNg-YU-nkB"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="XpB-fs-MRd" secondAttribute="trailing" constant="10" id="6BW-av-BHE"/>
+                <constraint firstItem="XpB-fs-MRd" firstAttribute="top" secondItem="DQ6-MA-xtZ" secondAttribute="bottomMargin" constant="10" id="Pcz-Z6-g2O"/>
+                <constraint firstItem="XpB-fs-MRd" firstAttribute="leading" secondItem="DQ6-MA-xtZ" secondAttribute="leading" constant="10" id="dek-YM-TMD"/>
+                <constraint firstAttribute="bottom" secondItem="XpB-fs-MRd" secondAttribute="bottom" constant="10" id="gwN-tc-j6V"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="gwN-tc-j6V"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+</document>

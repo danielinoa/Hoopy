@@ -33,15 +33,31 @@ final class FavoritesViewController: UICollectionViewController, ShotViewControl
         return manager
     }
     
-    // MARK: - 
+    // MARK: - Lifecycle
+
+    convenience init() {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        self.init(collectionViewLayout: layout)
+    }
+    
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collectionView?.backgroundColor = .white
+        collectionView?.register(ShotCollectionCell.self, forCellWithReuseIdentifier: ShotCollectionCell.reuseIdentifier)
+        collectionView?.addSubview(emptyShotsView)
+        
         navigationItem.titleView = titleLabel
         navigationItem.titleView?.sizeToFit()
-        collectionView?.addSubview(emptyShotsView)
+        
         updateDisplayOfEmptyShotsView()
     }
+    
+    // MARK: - 
     
     fileprivate func updateDisplayOfEmptyShotsView() {
         emptyShotsView.isHidden = !shots.isEmpty
@@ -60,11 +76,24 @@ final class FavoritesViewController: UICollectionViewController, ShotViewControl
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let collectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: "favoriteCollectionCell", for: indexPath) as? ShotCollectionCell else {
+        guard let collectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: ShotCollectionCell.reuseIdentifier, for: indexPath) as? ShotCollectionCell else {
             fatalError()
         }
         collectionCell.configure(with: shots[indexPath.row])
         return collectionCell
+    }
+    
+    // MARK: - Collection Delegate
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let shot = shots[indexPath.row]
+        let placeholderImage = (collectionView.cellForItem(at: indexPath) as? ShotCollectionCell)?.imageView.image
+        
+        let shotViewController = ShotViewController(shot: shot, placeholderImage: placeholderImage)
+        shotViewController.modalPresentationStyle = .overCurrentContext
+        shotViewController.delegate = self
+        
+        present(shotViewController, animated: false, completion: nil)
     }
     
     // MARK: - Collection Layout
@@ -73,17 +102,6 @@ final class FavoritesViewController: UICollectionViewController, ShotViewControl
         super.viewDidLayoutSubviews()
         if let collectionView = collectionView {
             emptyShotsView.frame = collectionView.bounds
-        }
-    }
-
-    // MARK: - Segue
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let shotViewController = segue.destination as? ShotViewController, let selectedIndexPath = collectionView?.indexPathsForSelectedItems?.first {
-            shotViewController.delegate = self
-            shotViewController.dribbbleShot = shots[selectedIndexPath.row]
-            let placeholderImage = (collectionView?.cellForItem(at: selectedIndexPath) as? ShotCollectionCell)?.imageView.image
-            shotViewController.placeholderImage = placeholderImage
         }
     }
     
