@@ -55,7 +55,7 @@ extension DribbbleShot {
     }
     
     var animated: Bool {
-        return (dictionary["animated"] as? Int) == 1
+        return (dictionary["animated"] as? Bool) == true
     }
     
     // MARK: - 
