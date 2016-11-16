@@ -95,7 +95,7 @@ extension DribbbleShot {
      Locally stores the specified shot in local collection of favorite shots.
      */
     static func favorite(shot: DribbbleShot) {
-        let shots = remove(shot: shot) // remove shot if it already exists
+        let shots = unfavorite(shot: shot) // remove shot if it already exists
         let data = NSKeyedArchiver.archivedData(withRootObject: shots.map({ $0.dictionary }) + [shot.dictionary])
         UserDefaults.standard.set(data, forKey: DribbbleShot.favoriteShotsKey)
     }
@@ -103,7 +103,7 @@ extension DribbbleShot {
     /**
      Removes the specified from the local collection of favorite shots.
      */
-    static func remove(shot: DribbbleShot) -> [DribbbleShot] {
+    static func unfavorite(shot: DribbbleShot) -> [DribbbleShot] {
         var shots = loadFavoriteShots()
         guard let shotID = shot.id else { return shots }
         let oldIndex = shots.index(where: {

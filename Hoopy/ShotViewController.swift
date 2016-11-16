@@ -7,39 +7,22 @@
 //
 
 import UIKit
-import Photos
 import Alamofire
 import FLAnimatedImage
-import TUSafariActivity
-import FTIndicator
 
 protocol ShotViewControllerDelegate: class {
     func shotViewController(shotViewController: ShotViewController, favoriteToggledShot: DribbbleShot)
 }
 
 final class ShotViewController: UIViewController {
-
-    /*
-     KNOWN ISSUE:
-     In iOS 9, the VisualEffectView's blur would animate along with the presentation of the view controller.
-     As of iOS 10, cross-disolve segue transitions look glitchy when the destination view controller
-     (presented as a modal over full screen) has a VisualEffectView as background.
-     WORKAROUND:
-     In order to properly animate the VisualEffectView's blur, the effectView alpha value is zeroed
-     when the view loads. Once the view has appeared the alpha value is brought back to 1 with an animation.
-     To prevent a transition delay, the presentation must be set to not animate.
-     */
     
-    @IBOutlet fileprivate weak var visualEffectView: UIVisualEffectView!
     @IBOutlet fileprivate weak var imageWrapperView: UIView!
-    @IBOutlet fileprivate weak var imageView: FLAnimatedImageView!
+    @IBOutlet private(set) weak var imageView: FLAnimatedImageView!
     @IBOutlet fileprivate weak var progressView: UIProgressView!
     @IBOutlet fileprivate weak var scrollView: UIScrollView!
     @IBOutlet fileprivate weak var titleLabel: UILabel!
     @IBOutlet fileprivate weak var authorLabel: UILabel!
     @IBOutlet fileprivate weak var authorImageView: UIImageView!
-    @IBOutlet fileprivate weak var actionButton: UIButton!
-    @IBOutlet fileprivate weak var favoriteButton: UIButton!
     
     let dribbbleShot: DribbbleShot
     let placeholderImage: UIImage?
@@ -65,21 +48,7 @@ final class ShotViewController: UIViewController {
         imageWrapperView.addGestureRecognizer(tapGesture)
         imageView.addGestureRecognizer(doubleTapGesture)
         scrollView.delegate = self
-        configureFavoriteButton()
         configureShot()
-        modalPresentationCapturesStatusBarAppearance = true
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        view.subviews.forEach { $0.alpha = 0 }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        UIView.animate(withDuration: 0.2) {
-            self.view.subviews.forEach { $0.alpha = 1 }
-        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -123,11 +92,6 @@ final class ShotViewController: UIViewController {
     
     }
     
-    fileprivate func configureFavoriteButton() {
-        let imageName = "heart-\(dribbbleShot.isFavorited ? "filled" : "empty")"
-        favoriteButton.setImage(UIImage(named: imageName), for: .normal)
-    }
-    
     // MARK: - Gestures
     
     fileprivate lazy var tapGesture: UITapGestureRecognizer = {
@@ -159,41 +123,6 @@ final class ShotViewController: UIViewController {
         } else {
             scrollView.zoom(to: CGRect(origin: locationOfTouch, size: .zero), animated: true)
         }
-    }
-    
-    // MARK: - IBActions
-    
-    @IBAction fileprivate func actionButtonTapped() {
-        if let urlPath = dribbbleShot.url, let url = NSURL(string: urlPath), let image = imageView.image {
-            let safariActivity = TUSafariActivity()
-            let activityViewController = UIActivityViewController(activityItems: [image, url], applicationActivities: [safariActivity])
-            activityViewController.excludedActivityTypes = [.assignToContact, .addToReadingList, .print]
-            activityViewController.completionWithItemsHandler = { (activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
-                guard let activityType = activityType else { return }
-                if activityType == .saveToCameraRoll && PHPhotoLibrary.authorizationStatus() == .authorized {
-                    FTIndicator.showToastMessage("Image Saved!")
-                } else if activityType == .copyToPasteboard {
-                    FTIndicator.showToastMessage("Copied!")
-                }
-            }
-            present(activityViewController, animated: true) {}
-        }
-    }
-    
-    @IBAction func favoriteAction(_ sender: AnyObject) {
-        if dribbbleShot.isFavorited {
-            let _ = DribbbleShot.remove(shot: dribbbleShot)
-        } else {
-            DribbbleShot.favorite(shot: dribbbleShot)
-        }
-        configureFavoriteButton()
-        delegate?.shotViewController(shotViewController: self, favoriteToggledShot: dribbbleShot)
-    }
-    
-    // MARK: - Status Bar Style
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
     }
     
 }

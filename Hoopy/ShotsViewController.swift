@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ShotsViewController: UICollectionViewController {
+final class ShotsViewController: UICollectionViewController, ShotsCarouselViewControllerDataSource {
     
     private lazy var favoritesBarButtonItem: UIBarButtonItem = {
         let heartImage = UIImage(named: "heart-filled")
@@ -47,7 +47,7 @@ final class ShotsViewController: UICollectionViewController {
     // MARK: - Data Source
     
     /**
-     Refactor such that each category maps to a collection view and a data source
+     TODO: Refactor such that each category maps to a collection view and a data source
      */
     fileprivate(set) var dataSource: DribbbleDataSource!
     fileprivate let dataSources: [DribbbleDataSource] = {
@@ -162,12 +162,11 @@ final class ShotsViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let shot = dataSource.shots[indexPath.row]
-        let placeholderImage = (collectionView.cellForItem(at: indexPath) as? ShotCollectionCell)?.imageView.image
-        
-        let shotViewController = ShotViewController(shot: shot, placeholderImage: placeholderImage)
-        shotViewController.modalPresentationStyle = .overCurrentContext
-        
-        present(shotViewController, animated: false, completion: nil)
+        let carouselViewController = ShotsCarouselViewController(shot: shot)
+        carouselViewController.dataSource = self
+        carouselViewController.modalPresentationStyle = .overCurrentContext
+        carouselViewController.modalTransitionStyle = .crossDissolve
+        present(carouselViewController, animated: false, completion: nil)
     }
     
     // MARK: - Refresh
@@ -190,6 +189,26 @@ final class ShotsViewController: UICollectionViewController {
         DispatchQueue.main.async {
             self.collectionView?.reloadData()
         }
+    }
+    
+    // MARK: - ShotsCarouselViewControllerDataSource
+    
+    func shotBefore(shot: DribbbleShot, in: ShotsCarouselViewController) -> DribbbleShot? {
+        if let shotIndex = dataSource.shots.index(where: { $0.id == shot.id }),
+            shotIndex - 1 >= 0 {
+            let previousShot = dataSource.shots[shotIndex - 1]
+            return previousShot
+        }
+        return nil
+    }
+    
+    func shotAfter(shot: DribbbleShot, in: ShotsCarouselViewController) -> DribbbleShot? {
+        if let shotIndex = dataSource.shots.index(where: { $0.id == shot.id }),
+        shotIndex + 1 < dataSource.shots.count {
+            let nextShot = dataSource.shots[shotIndex + 1]
+            return nextShot
+        }
+        return nil
     }
     
 }

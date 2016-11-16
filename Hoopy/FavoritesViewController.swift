@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class FavoritesViewController: UICollectionViewController, ShotViewControllerDelegate {
+final class FavoritesViewController: UICollectionViewController, ShotsCarouselViewControllerDataSource, ShotsCarouselViewControllerDelegate {
     
     fileprivate var shots: [DribbbleShot] = DribbbleShot.loadFavoriteShots().reversed() {
         didSet {
@@ -87,13 +87,12 @@ final class FavoritesViewController: UICollectionViewController, ShotViewControl
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let shot = shots[indexPath.row]
-        let placeholderImage = (collectionView.cellForItem(at: indexPath) as? ShotCollectionCell)?.imageView.image
-        
-        let shotViewController = ShotViewController(shot: shot, placeholderImage: placeholderImage)
-        shotViewController.modalPresentationStyle = .overCurrentContext
-        shotViewController.delegate = self
-        
-        present(shotViewController, animated: false, completion: nil)
+        let carouselViewController = ShotsCarouselViewController(shot: shot)
+        carouselViewController.dataSource = self
+        carouselViewController.delegate = self
+        carouselViewController.modalPresentationStyle = .overCurrentContext
+        carouselViewController.modalTransitionStyle = .crossDissolve
+        present(carouselViewController, animated: false, completion: nil)
     }
     
     // MARK: - Collection Layout
@@ -105,9 +104,29 @@ final class FavoritesViewController: UICollectionViewController, ShotViewControl
         }
     }
     
-    // MARK: - ShotViewControllerDelegate
+    // MARK: - ShotsCarouselViewControllerDataSource
     
-    func shotViewController(shotViewController: ShotViewController, favoriteToggledShot: DribbbleShot) {
+    func shotBefore(shot: DribbbleShot, in: ShotsCarouselViewController) -> DribbbleShot? {
+        if let shotIndex = shots.index(where: { $0.id == shot.id }),
+            shotIndex - 1 >= 0 {
+            let previousShot = shots[shotIndex - 1]
+            return previousShot
+        }
+        return nil
+    }
+    
+    func shotAfter(shot: DribbbleShot, in: ShotsCarouselViewController) -> DribbbleShot? {
+        if let shotIndex = shots.index(where: { $0.id == shot.id }),
+            shotIndex + 1 < shots.count {
+            let nextShot = shots[shotIndex + 1]
+            return nextShot
+        }
+        return nil
+    }
+    
+    // MARK: - ShotsCarouselViewControllerDelegate
+    
+    func favoriteToggled(shot: DribbbleShot, in: ShotsCarouselViewController) {
         shots = DribbbleShot.loadFavoriteShots().reversed()
     }
 
