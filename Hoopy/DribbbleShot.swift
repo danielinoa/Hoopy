@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-struct DribbbleShot: CustomDebugStringConvertible {
+struct DribbbleShot: CustomDebugStringConvertible, Hashable {
     
     /**
      Dictionary representation of receiver.
@@ -20,6 +20,7 @@ struct DribbbleShot: CustomDebugStringConvertible {
     // MARK: - Lifecycle
     
     init?(dictionary: [String: Any]) {
+        guard dictionary["id"] is Int else { return nil }
         guard let imagesUrl = dictionary["images"] as? [String: Any] else { return nil }
         self.dictionary = dictionary
         self.imagesUrl = imagesUrl
@@ -27,8 +28,11 @@ struct DribbbleShot: CustomDebugStringConvertible {
     
     // MARK: - Computed Properties
     
-    var id: Int? {
-        return dictionary["id"] as? Int
+    var id: Int {
+        guard let id = dictionary["id"] as? Int else {
+            fatalError("Dribbble shot is expected to have a valid id")
+        }
+        return id
     }
     
     var title: String? {
@@ -75,6 +79,18 @@ struct DribbbleShot: CustomDebugStringConvertible {
         return "\(title)"
     }
     
+    // MARK: - Hashable
+    
+    var hashValue: Int {
+        return id.hashValue
+    }
+    
+}
+
+// MARK: - Equatable
+
+func ==(lhs: DribbbleShot, rhs: DribbbleShot) -> Bool {
+    return lhs.id == rhs.id
 }
 
 extension DribbbleShot {
@@ -97,11 +113,7 @@ extension DribbbleShot {
      */
     static func unfavorite(shot: DribbbleShot) -> [DribbbleShot] {
         var shots = loadFavoriteShots()
-        guard let shotID = shot.id else { return shots }
-        let oldIndex = shots.index(where: {
-            guard let id = $0.id else { return false }
-            return id == shotID
-        })
+        let oldIndex = shots.index(of: shot)
         if let index = oldIndex {
             shots.remove(at: index)
             let data = NSKeyedArchiver.archivedData(withRootObject: shots.map { $0.dictionary } )
@@ -121,10 +133,7 @@ extension DribbbleShot {
     
     var isFavorited: Bool {
         let shots = DribbbleShot.loadFavoriteShots()
-        return shots.contains(where: {
-            guard let retrievedID = $0.id, let id = self.id else { return false }
-            return id == retrievedID
-        })
+        return shots.contains(self)
     }
     
 }

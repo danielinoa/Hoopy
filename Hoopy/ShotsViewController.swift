@@ -194,7 +194,7 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
     // MARK: - ShotsCarouselViewControllerDataSource
     
     func shotBefore(shot: DribbbleShot, in: ShotsCarouselViewController) -> DribbbleShot? {
-        if let shotIndex = dataSource.shots.index(where: { $0.id == shot.id }),
+        if let shotIndex = dataSource.shots.index(of: shot),
             shotIndex - 1 >= 0 {
             let previousShot = dataSource.shots[shotIndex - 1]
             return previousShot
@@ -203,7 +203,7 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
     }
     
     func shotAfter(shot: DribbbleShot, in: ShotsCarouselViewController) -> DribbbleShot? {
-        if let shotIndex = dataSource.shots.index(where: { $0.id == shot.id }),
+        if let shotIndex = dataSource.shots.index(of: shot),
         shotIndex + 1 < dataSource.shots.count {
             let nextShot = dataSource.shots[shotIndex + 1]
             return nextShot
