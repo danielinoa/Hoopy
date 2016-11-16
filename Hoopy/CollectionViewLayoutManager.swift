@@ -13,7 +13,7 @@ class ShotsLayoutManager: NSObject, UICollectionViewDelegateFlowLayout {
     
     static let shared = ShotsLayoutManager()
     
-    fileprivate var delegates: NSHashTable<AnyObject> = NSHashTable.weakObjects()
+    private var delegates: NSHashTable<AnyObject> = NSHashTable.weakObjects()
     
     var shotsInRow: Int {
         get {

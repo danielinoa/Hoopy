@@ -10,14 +10,14 @@ import UIKit
 
 final class FavoritesViewController: UICollectionViewController, ShotsCarouselViewControllerDataSource, ShotsCarouselViewControllerDelegate {
     
-    fileprivate var shots: [DribbbleShot] = DribbbleShot.loadFavoriteShots().reversed() {
+    private var shots: [DribbbleShot] = DribbbleShot.loadFavoriteShots().reversed() {
         didSet {
             collectionView?.reloadData()
             updateDisplayOfEmptyShotsView()
         }
     }
     
-    fileprivate let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16).smallCaps
         label.text = "favorites"
@@ -27,7 +27,7 @@ final class FavoritesViewController: UICollectionViewController, ShotsCarouselVi
     
     let emptyShotsView = EmptyShotsView.instanceFromNib()
     
-    fileprivate var shotsLayoutManager: ShotsLayoutManager {
+    var shotsLayoutManager: ShotsLayoutManager {
         let manager = ShotsLayoutManager.shared
         manager.addDelegate(delegate: self)
         return manager
@@ -59,7 +59,7 @@ final class FavoritesViewController: UICollectionViewController, ShotsCarouselVi
     
     // MARK: - 
     
-    fileprivate func updateDisplayOfEmptyShotsView() {
+    private func updateDisplayOfEmptyShotsView() {
         emptyShotsView.isHidden = !shots.isEmpty
         collectionView?.isScrollEnabled = !shots.isEmpty
         if shots.isEmpty {

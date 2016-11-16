@@ -29,7 +29,7 @@ final class ShotCollectionCell: UICollectionViewCell {
         configure()
     }
     
-    fileprivate func configure() {
+    private func configure() {
         backgroundColor = .black
         clipsToBounds = true
         addSubview(imageView)

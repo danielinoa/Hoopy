@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ShotsViewController: UICollectionViewController, ShotsCarouselViewControllerDataSource {
+final class ShotsViewController: UICollectionViewController, ShotsCarouselViewControllerDataSource, UICollectionViewDelegateFlowLayout, ShotsLayoutManagerDelegate {
     
     private lazy var favoritesBarButtonItem: UIBarButtonItem = {
         let heartImage = UIImage(named: "heart-filled")
@@ -22,7 +22,7 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
         return item
     }()
     
-    fileprivate lazy var segmentedControl: UISegmentedControl = {
+    private lazy var segmentedControl: UISegmentedControl = {
         let items: [String] = DribbbleDataSource.Category.all.map { $0.rawValue }
         let control = UISegmentedControl(items: items)
         control.addTarget(self, action: #selector(segmentedControlChanged(_:)), for: .valueChanged)
@@ -31,14 +31,14 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
         return control
     }()
     
-    fileprivate lazy var refreshControl: UIRefreshControl = {
+    private lazy var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
         control.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         control.tintColor = UIColor(hexString: "#FF0080")
         return control
     }()
     
-    fileprivate var shotsLayoutManager: ShotsLayoutManager {
+    private var shotsLayoutManager: ShotsLayoutManager {
         let manager = ShotsLayoutManager.shared
         manager.addDelegate(delegate: self)
         return manager
@@ -49,13 +49,13 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
     /**
      TODO: Refactor such that each category maps to a collection view and a data source
      */
-    fileprivate(set) var dataSource: DribbbleDataSource!
-    fileprivate let dataSources: [DribbbleDataSource] = {
+    private(set) var dataSource: DribbbleDataSource!
+    private let dataSources: [DribbbleDataSource] = {
         let categories = DribbbleDataSource.Category.all.map { DribbbleDataSource(category: $0) }
         return categories
     }()
     
-    fileprivate func reloadDataSources() {
+    private func reloadDataSources() {
         dataSource = dataSources[segmentedControl.selectedSegmentIndex]
         dataSources.forEach({ dataSource in
             dataSource.reset()
@@ -171,7 +171,7 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
     
     // MARK: - Refresh
     
-    @objc fileprivate func refresh(_ sender: AnyObject?) {
+    @objc private func refresh(_ sender: AnyObject?) {
         dataSource.reset()
         dataSource.loadCurrentPageOfShots { _ in
             DispatchQueue.main.async {
@@ -183,7 +183,7 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
     
     // MARK: - Categories
     
-    @objc fileprivate func segmentedControlChanged(_ control: UISegmentedControl) {
+    @objc private func segmentedControlChanged(_ control: UISegmentedControl) {
         guard segmentedControl == control else { return }
         dataSource = dataSources[segmentedControl.selectedSegmentIndex]
         DispatchQueue.main.async {
@@ -210,10 +210,6 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
         }
         return nil
     }
-    
-}
-
-extension ShotsViewController: UICollectionViewDelegateFlowLayout, ShotsLayoutManagerDelegate {
     
     // MARK: - Collection Layout & ShotsLayoutManagerDelegate
     

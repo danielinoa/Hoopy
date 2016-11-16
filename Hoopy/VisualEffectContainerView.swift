@@ -7,7 +7,7 @@ import UIKit
 
 class VisualEffectContainerView: UIView {
 
-    fileprivate let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+    private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,7 +23,7 @@ class VisualEffectContainerView: UIView {
         configure()
     }
     
-    fileprivate func configure() {
+    private func configure() {
         backgroundColor = .clear
         
         layer.cornerRadius = 10

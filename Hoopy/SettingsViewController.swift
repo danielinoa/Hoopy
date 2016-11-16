@@ -10,17 +10,17 @@ import UIKit
 
 final class SettingsViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    @IBOutlet fileprivate var bottomToBottomConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate var topToBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private var bottomToBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private var topToBottomConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak fileprivate var sortShotsLabel: UILabel!
-    @IBOutlet weak fileprivate var layoutShotsLabel: UILabel!
-    @IBOutlet weak fileprivate var sortSegmentedControl: UISegmentedControl!
-    @IBOutlet weak fileprivate var layoutSegmentedControl: UISegmentedControl!
+    @IBOutlet weak private var sortShotsLabel: UILabel!
+    @IBOutlet weak private var layoutShotsLabel: UILabel!
+    @IBOutlet weak private var sortSegmentedControl: UISegmentedControl!
+    @IBOutlet weak private var layoutSegmentedControl: UISegmentedControl!
     
     private lazy var tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped(_:)))
     
-    fileprivate var shotsLayoutManager = ShotsLayoutManager.shared
+    private var shotsLayoutManager = ShotsLayoutManager.shared
     
     // MARK: - View Lifecycle
     
@@ -47,7 +47,7 @@ final class SettingsViewController: UIViewController, UIGestureRecognizerDelegat
     
     // MARK: -
     
-    fileprivate func setSettingsViewVisible(flag: Bool = true, completion: (() -> Void)? = nil) {
+    private func setSettingsViewVisible(flag: Bool = true, completion: (() -> Void)? = nil) {
         /*
          Long `if` statement to avoid breaking constraints.
          Constraints to-be-removed should be removed (marked as false) first before adding new ones.
@@ -69,7 +69,7 @@ final class SettingsViewController: UIViewController, UIGestureRecognizerDelegat
         }
     }
     
-    @objc fileprivate func tapped(_ sender: UITapGestureRecognizer) {
+    @objc private func tapped(_ sender: UITapGestureRecognizer) {
         setSettingsViewVisible(flag: false) { 
             self.dismiss(animated: true, completion: {})
         }
@@ -83,14 +83,14 @@ final class SettingsViewController: UIViewController, UIGestureRecognizerDelegat
     
     // MARK: -
     
-    @IBAction fileprivate func sortSegmentedControlChangedValue(_ segmentedControl: UISegmentedControl) {
+    @IBAction private func sortSegmentedControlChangedValue(_ segmentedControl: UISegmentedControl) {
         guard segmentedControl == sortSegmentedControl else { return }
         if let category = ShotsSortCategory(rawValue: sortSegmentedControl.selectedSegmentIndex) {
             ShotsSortCategory.defaultCategory = category
         }
     }
     
-    @IBAction fileprivate func layoutSegmentedControlChangedValue(_ segmentedControl: UISegmentedControl) {
+    @IBAction private func layoutSegmentedControlChangedValue(_ segmentedControl: UISegmentedControl) {
         guard segmentedControl == layoutSegmentedControl else { return }
         shotsLayoutManager.shotsInRow = layoutSegmentedControl.selectedSegmentIndex + 2
     }

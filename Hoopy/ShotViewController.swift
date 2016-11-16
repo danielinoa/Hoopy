@@ -14,19 +14,19 @@ protocol ShotViewControllerDelegate: class {
     func shotViewController(shotViewController: ShotViewController, favoriteToggledShot: DribbbleShot)
 }
 
-final class ShotViewController: UIViewController {
+final class ShotViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
-    @IBOutlet fileprivate weak var imageWrapperView: UIView!
+    @IBOutlet private weak var imageWrapperView: UIView!
     @IBOutlet private(set) weak var imageView: FLAnimatedImageView!
-    @IBOutlet fileprivate weak var progressView: UIProgressView!
-    @IBOutlet fileprivate weak var scrollView: UIScrollView!
-    @IBOutlet fileprivate weak var titleLabel: UILabel!
-    @IBOutlet fileprivate weak var authorLabel: UILabel!
-    @IBOutlet fileprivate weak var authorImageView: UIImageView!
+    @IBOutlet private weak var progressView: UIProgressView!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var authorLabel: UILabel!
+    @IBOutlet private weak var authorImageView: UIImageView!
     
     let dribbbleShot: DribbbleShot
     let placeholderImage: UIImage?
-    fileprivate var image: UIImage?
+    private var image: UIImage?
     
     weak var delegate: ShotViewControllerDelegate?
     
@@ -58,7 +58,7 @@ final class ShotViewController: UIViewController {
     
     // MARK: -
     
-    fileprivate func configureShot() {
+    private func configureShot() {
         titleLabel.text = dribbbleShot.title
         authorLabel.text = dribbbleShot.author
         imageView.image = placeholderImage
@@ -94,20 +94,20 @@ final class ShotViewController: UIViewController {
     
     // MARK: - Gestures
     
-    fileprivate lazy var tapGesture: UITapGestureRecognizer = {
+    private lazy var tapGesture: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
         gesture.delegate = self
         return gesture
     }()
     
-    fileprivate lazy var doubleTapGesture: UITapGestureRecognizer = {
+    private lazy var doubleTapGesture: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(doubleTap(_:)))
         gesture.numberOfTapsRequired = 2
         gesture.delegate = self
         return gesture
     }()
     
-    @objc fileprivate func tap(_ sender: AnyObject) {
+    @objc private func tap(_ sender: AnyObject) {
         UIView.animate(withDuration: 0.2, animations: {
             self.view.subviews.forEach { $0.alpha = 0 }
         }) { _ in
@@ -115,7 +115,7 @@ final class ShotViewController: UIViewController {
         }
     }
     
-    @objc fileprivate func doubleTap(_ sender: AnyObject) {
+    @objc private func doubleTap(_ sender: AnyObject) {
         guard let gestureRecognizer = sender as? UITapGestureRecognizer else { return }
         let locationOfTouch = gestureRecognizer.location(ofTouch: 0, in: imageWrapperView)
         if scrollView.zoomScale > 1 {
@@ -124,10 +124,6 @@ final class ShotViewController: UIViewController {
             scrollView.zoom(to: CGRect(origin: locationOfTouch, size: .zero), animated: true)
         }
     }
-    
-}
-
-extension ShotViewController: UIScrollViewDelegate {
     
     // MARK: - UIScrollViewDelegate
     
@@ -143,10 +139,6 @@ extension ShotViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageWrapperView
     }
-    
-}
-
-extension ShotViewController: UIGestureRecognizerDelegate {
     
     // MARK: - UIGestureRecognizerDelegate
     

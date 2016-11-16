@@ -82,7 +82,7 @@ final class ShotsCarouselViewController: UIViewController, UIPageViewControllerD
     
     // MARK: - 
     
-    fileprivate func configureFavoriteButton() {
+    private func configureFavoriteButton() {
         if let shotViewController = (pageViewController.viewControllers?.first as? ShotViewController) {
             let imageName = "heart-\(shotViewController.dribbbleShot.isFavorited ? "filled" : "empty")"
             favoriteButton.setImage(UIImage(named: imageName), for: .normal)

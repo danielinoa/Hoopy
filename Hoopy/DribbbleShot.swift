@@ -9,13 +9,13 @@
 import Foundation
 import Alamofire
 
-struct DribbbleShot {
+struct DribbbleShot: CustomDebugStringConvertible {
     
     /**
      Dictionary representation of receiver.
      */
     let dictionary: [String: Any]
-    fileprivate let imagesUrl: [String: Any]
+    private let imagesUrl: [String: Any]
     
     // MARK: - Lifecycle
     
@@ -25,9 +25,7 @@ struct DribbbleShot {
         self.imagesUrl = imagesUrl
     }
     
-}
-
-extension DribbbleShot {
+    // MARK: - Computed Properties
     
     var id: Int? {
         return dictionary["id"] as? Int
@@ -58,8 +56,6 @@ extension DribbbleShot {
         return (dictionary["animated"] as? Bool) == true
     }
     
-    // MARK: - 
-    
     var highestResImageUrl: String? { return [hdImageUrl, imageUrl, teaserImageUrl].flatMap({ $0 }).first }
     
     var imageUrl: String? {
@@ -72,10 +68,6 @@ extension DribbbleShot {
     var teaserImageUrl: String? {
         return imagesUrl["teaser"] as? String
     }
-    
-}
-
-extension DribbbleShot: CustomDebugStringConvertible {
     
     // MARK: - CustomDebugStringConvertible
     
