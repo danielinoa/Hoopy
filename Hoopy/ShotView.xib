@@ -13,17 +13,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShotViewController" customModule="Hoopy" customModuleProvider="target">
             <connections>
-                <outlet property="actionButton" destination="lrn-mH-5db" id="MEK-VQ-9YP"/>
                 <outlet property="authorImageView" destination="eb3-1J-fAo" id="jGz-4G-ULD"/>
                 <outlet property="authorLabel" destination="Son-LG-vc9" id="ngy-fN-ld7"/>
-                <outlet property="favoriteButton" destination="czs-dV-Auh" id="xQm-Am-bX5"/>
                 <outlet property="imageView" destination="i1n-Hm-BXu" id="HfH-1G-htZ"/>
                 <outlet property="imageWrapperView" destination="lQV-qw-oz7" id="Cvh-TM-5LO"/>
                 <outlet property="progressView" destination="nhI-Zq-MQy" id="Jqy-0E-lgc"/>
                 <outlet property="scrollView" destination="4zw-kl-yVx" id="YKy-Lq-kXr"/>
                 <outlet property="titleLabel" destination="rZJ-WL-lys" id="ybp-Ud-kB4"/>
                 <outlet property="view" destination="Kjb-gb-uOy" id="GTe-LA-eFE"/>
-                <outlet property="visualEffectView" destination="aNE-1r-byo" id="X5P-7P-AyR"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -31,15 +28,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <visualEffectView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNE-1r-byo">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="F1G-Gq-LvT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </view>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <blurEffect style="dark"/>
-                </visualEffectView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="4zw-kl-yVx">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
@@ -148,72 +136,12 @@
                         <constraint firstAttribute="trailing" secondItem="lQV-qw-oz7" secondAttribute="trailing" id="hYB-46-O0J"/>
                     </constraints>
                 </scrollView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrn-mH-5db" customClass="ExtendedHitButton" customModule="Hoopy" customModuleProvider="target">
-                    <rect key="frame" x="182.5" y="633" width="20" height="20"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="lrn-mH-5db" secondAttribute="height" multiplier="1:1" id="f3l-BG-Kh9"/>
-                        <constraint firstAttribute="height" constant="20" id="neW-X4-txf"/>
-                    </constraints>
-                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <state key="normal" title="Button" image="action"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="hitTestTopOffset">
-                            <real key="value" value="30"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="hitTestLeftOffset">
-                            <real key="value" value="30"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="hitTestBottomOffset">
-                            <real key="value" value="30"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="hitTestRightOffset">
-                            <real key="value" value="30"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="actionButtonTapped" destination="-1" eventType="touchUpInside" id="5Mx-l4-MiC"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czs-dV-Auh" customClass="ExtendedHitButton" customModule="Hoopy" customModuleProvider="target">
-                    <rect key="frame" x="343" y="631" width="24" height="24"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="24" id="Oba-Hy-IgJ"/>
-                        <constraint firstAttribute="height" constant="24" id="tbf-Qa-EgK"/>
-                    </constraints>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <state key="normal" image="heart-filled"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="hitTestTopOffset">
-                            <real key="value" value="30"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="hitTestLeftOffset">
-                            <real key="value" value="30"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="hitTestBottomOffset">
-                            <real key="value" value="30"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="hitTestRightOffset">
-                            <real key="value" value="30"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="favoriteAction:" destination="-1" eventType="touchUpInside" id="yKc-qt-NRc"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="czs-dV-Auh" secondAttribute="bottom" constant="12" id="36Z-Tx-5Od"/>
-                <constraint firstAttribute="bottom" secondItem="lrn-mH-5db" secondAttribute="bottom" constant="14" id="5z0-U9-dNO"/>
-                <constraint firstItem="aNE-1r-byo" firstAttribute="top" secondItem="Kjb-gb-uOy" secondAttribute="top" id="7iK-jC-bBz"/>
-                <constraint firstItem="aNE-1r-byo" firstAttribute="leading" secondItem="Kjb-gb-uOy" secondAttribute="leading" id="83e-f8-fRq"/>
-                <constraint firstAttribute="bottom" secondItem="aNE-1r-byo" secondAttribute="bottom" id="9A9-bD-9t3"/>
                 <constraint firstItem="lQV-qw-oz7" firstAttribute="width" secondItem="Kjb-gb-uOy" secondAttribute="width" id="9KF-qE-5vk"/>
-                <constraint firstItem="lrn-mH-5db" firstAttribute="centerX" secondItem="Kjb-gb-uOy" secondAttribute="centerX" constant="5" id="GRA-48-bkQ"/>
                 <constraint firstItem="4zw-kl-yVx" firstAttribute="top" secondItem="Kjb-gb-uOy" secondAttribute="top" id="IkG-Zy-NOV"/>
-                <constraint firstAttribute="trailingMargin" secondItem="czs-dV-Auh" secondAttribute="trailing" id="WFD-gt-vWC"/>
-                <constraint firstAttribute="trailing" secondItem="aNE-1r-byo" secondAttribute="trailing" id="aI8-L9-rX7"/>
                 <constraint firstItem="4zw-kl-yVx" firstAttribute="leading" secondItem="Kjb-gb-uOy" secondAttribute="leading" id="cwb-bg-hFS"/>
                 <constraint firstAttribute="bottom" secondItem="4zw-kl-yVx" secondAttribute="bottom" id="en9-W9-ZE2"/>
                 <constraint firstAttribute="trailing" secondItem="4zw-kl-yVx" secondAttribute="trailing" id="iJk-jC-iuY"/>
@@ -222,8 +150,4 @@
             <point key="canvasLocation" x="179.5" y="-537.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="action" width="50" height="50"/>
-        <image name="heart-filled" width="33" height="33"/>
-    </resources>
 </document>
