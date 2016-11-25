@@ -162,7 +162,11 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let shot = dataSource.shots[indexPath.row]
-        let carouselViewController = ShotsCarouselViewController(shot: shot)
+        
+        let cell = (collectionView.cellForItem(at: indexPath) as? ShotCollectionCell)
+        let placeholderImage = cell?.imageView.image
+        
+        let carouselViewController = ShotsCarouselViewController(shot: shot, placeholderImage: placeholderImage)
         carouselViewController.dataSource = self
         carouselViewController.modalPresentationStyle = .overCurrentContext
         carouselViewController.modalTransitionStyle = .crossDissolve
@@ -207,6 +211,16 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
         shotIndex + 1 < dataSource.shots.count {
             let nextShot = dataSource.shots[shotIndex + 1]
             return nextShot
+        }
+        return nil
+    }
+    
+    func placeholderImage(for shot: DribbbleShot, in: ShotsCarouselViewController) -> UIImage? {
+        if let shotIndex = dataSource.shots.index(of: shot) {
+            let indexPath = IndexPath(row: shotIndex, section: 0)
+            let cell = (collectionView?.cellForItem(at: indexPath) as? ShotCollectionCell)
+            let placeholderImage = cell?.imageView.image
+            return placeholderImage
         }
         return nil
     }

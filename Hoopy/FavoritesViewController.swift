@@ -87,7 +87,12 @@ final class FavoritesViewController: UICollectionViewController, ShotsCarouselVi
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let shot = shots[indexPath.row]
-        let carouselViewController = ShotsCarouselViewController(shot: shot)
+        
+        let cell = (collectionView.cellForItem(at: indexPath) as? ShotCollectionCell)
+        let placeholderImage = cell?.imageView.image
+        
+        let carouselViewController = ShotsCarouselViewController(shot: shot, placeholderImage: placeholderImage)
+        
         carouselViewController.dataSource = self
         carouselViewController.delegate = self
         carouselViewController.modalPresentationStyle = .overCurrentContext
@@ -120,6 +125,16 @@ final class FavoritesViewController: UICollectionViewController, ShotsCarouselVi
             shotIndex + 1 < shots.count {
             let nextShot = shots[shotIndex + 1]
             return nextShot
+        }
+        return nil
+    }
+    
+    func placeholderImage(for shot: DribbbleShot, in: ShotsCarouselViewController) -> UIImage? {
+        if let shotIndex = shots.index(of: shot) {
+            let indexPath = IndexPath(row: shotIndex, section: 0)
+            let cell = (collectionView?.cellForItem(at: indexPath) as? ShotCollectionCell)
+            let placeholderImage = cell?.imageView.image
+            return placeholderImage
         }
         return nil
     }

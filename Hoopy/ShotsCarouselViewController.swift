@@ -18,6 +18,7 @@ protocol ShotsCarouselViewControllerDelegate: class {
 protocol ShotsCarouselViewControllerDataSource: class {
     func shotBefore(shot: DribbbleShot, in: ShotsCarouselViewController) -> DribbbleShot?
     func shotAfter(shot: DribbbleShot, in: ShotsCarouselViewController) -> DribbbleShot?
+    func placeholderImage(for shot: DribbbleShot, in: ShotsCarouselViewController) -> UIImage?
 }
 
 final class ShotsCarouselViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
@@ -43,10 +44,10 @@ final class ShotsCarouselViewController: UIViewController, UIPageViewControllerD
     
     // MARK: - Lifecycle
     
-    init(shot: DribbbleShot) {
+    init(shot: DribbbleShot, placeholderImage: UIImage? = nil) {
         super.init(nibName: nil, bundle: nil)
         
-        let shotViewController = ShotViewController(shot: shot)
+        let shotViewController = ShotViewController(shot: shot, placeholderImage: placeholderImage)
         
         pageViewController.dataSource = self
         pageViewController.delegate = self
@@ -94,7 +95,8 @@ final class ShotsCarouselViewController: UIViewController, UIPageViewControllerD
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         if let shotViewController = viewController as? ShotViewController,
             let previousShot = dataSource?.shotBefore(shot: shotViewController.dribbbleShot, in: self) {
-            let shotViewController = ShotViewController(shot: previousShot)
+            let previousImage = dataSource?.placeholderImage(for: previousShot, in: self)
+            let shotViewController = ShotViewController(shot: previousShot, placeholderImage: previousImage)
             return shotViewController
         }
         return nil
@@ -103,7 +105,8 @@ final class ShotsCarouselViewController: UIViewController, UIPageViewControllerD
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         if let shotViewController = viewController as? ShotViewController,
             let nextShot = dataSource?.shotAfter(shot: shotViewController.dribbbleShot, in: self) {
-            let shotViewController = ShotViewController(shot: nextShot)
+            let nextImage = dataSource?.placeholderImage(for: nextShot, in: self)
+            let shotViewController = ShotViewController(shot: nextShot, placeholderImage: nextImage)
             return shotViewController
         }
         return nil
