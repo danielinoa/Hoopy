@@ -32,17 +32,14 @@ final class DribbbleDataSource {
         ]
         let request = Alamofire.request("https://api.dribbble.com/v1/shots", parameters: parameters)
         request.responseJSON { response in
-            do {
-                let json = try JSONSerialization.jsonObject(with: response.data!, options: .allowFragments)
-                if let dictionariesArray = json as? [[String: Any]] {
-                    let newShots: [DribbbleShot] = dictionariesArray.flatMap({ DribbbleShot(dictionary: $0) })
-                    let shotsOrderedSet = NSOrderedSet(array: self.shots + newShots)
-                    self.shots = shotsOrderedSet.array as! [DribbbleShot]
-                    completion?(newShots)
-                } else {
-                    completion?(nil)
-                }
-            } catch {
+            if let responseData = response.data,
+                let json = try? JSONSerialization.jsonObject(with: responseData, options: .allowFragments),
+                let dictionariesArray = json as? [[String: Any]] {
+                let newShots: [DribbbleShot] = dictionariesArray.flatMap({ DribbbleShot(dictionary: $0) })
+                let shotsOrderedSet = NSOrderedSet(array: self.shots + newShots)
+                self.shots = shotsOrderedSet.array as! [DribbbleShot]
+                completion?(newShots)
+            } else {
                 completion?(nil)
             }
         }
