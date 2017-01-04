@@ -22,7 +22,6 @@ final class DribbbleDataSource {
         self.category = category
     }
     
-    // TODO: add error parameter in completion block
     func loadCurrentPageOfShots(completion: ((_ shots: [DribbbleShot]?) -> Void)? = nil) {
         let parameters: Parameters = [
             "access_token": dribbbleAccessToken,
