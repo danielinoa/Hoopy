@@ -57,10 +57,6 @@ final class DribbbleDataSource {
         shots = []
     }
     
-}
-
-extension DribbbleDataSource {
-    
     enum Category: String {
         case popular = "popular"
         case animated = "animated"
