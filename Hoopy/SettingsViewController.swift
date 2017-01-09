@@ -48,17 +48,14 @@ final class SettingsViewController: UIViewController, UIGestureRecognizerDelegat
     // MARK: -
     
     private func setSettingsViewVisible(flag: Bool = true, completion: (() -> Void)? = nil) {
-        /*
-         Long `if` statement to avoid breaking constraints.
-         Constraints to-be-removed should be removed (marked as false) first before adding new ones.
-         */
-        if flag {
-            topToBottomConstraint.isActive = false
-            bottomToBottomConstraint.isActive = true
-        } else {
-            bottomToBottomConstraint.isActive = false
-            topToBottomConstraint.isActive = true
-        }
+        
+        // First disable all constraints.
+        topToBottomConstraint.isActive = false
+        bottomToBottomConstraint.isActive = false
+        
+        // Then enable the corresponding constraint that will either show or hide the actionsheet.
+        topToBottomConstraint.isActive = !flag
+        bottomToBottomConstraint.isActive = flag
         
         view.setNeedsUpdateConstraints()
         UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
