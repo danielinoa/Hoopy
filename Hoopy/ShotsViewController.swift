@@ -113,6 +113,12 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
         present(settingsViewController, animated: false, completion: nil)
     }
     
+    private func scroll(to shot: DribbbleShot) {
+        guard let shotIndex = dataSource.shots.index(of: shot) else { return }
+        let shotIndexPath = IndexPath(row: shotIndex, section: 0)
+        collectionView?.scrollToItem(at: shotIndexPath, at: .bottom, animated: true)
+    }
+    
     // MARK: - KVO
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -142,21 +148,9 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
     
     // MARK: - Collection Delegate
     
-    
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == dataSource.shots.count - 4 {
-            // This is a workaround. http://stackoverflow.com/questions/18796891/uicollectionview-reloaddata-not-functioning-properly-in-ios-7
-            dataSource.loadNextPageOfShots(completion: { _ in
-                DispatchQueue.main.async {
-                    let numRows = collectionView.numberOfItems(inSection: 0)
-                    let numOfNewPaths = abs(self.dataSource.shots.count - numRows)
-                    var newIndexPaths: [IndexPath] = []
-                    for index in 0..<numOfNewPaths {
-                        newIndexPaths.append(IndexPath(item: numRows + index, section: 0))
-                    }
-                    collectionView.reloadData()
-                }
-            })
+        if presentedViewController == nil {
+            retrieveNewShots(forShotIndex: indexPath.row)
         }
     }
     
@@ -185,6 +179,29 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
         }
     }
     
+    // MARK: - Pagination
+    
+    /**
+     Retrieves and inserts new shots in the collection.
+     */
+    private func retrieveNewShots(forShotIndex index: Int) {
+        let shouldRetrieveMoreShots = index >= dataSource.shots.count - 4
+        if let collectionView = collectionView, shouldRetrieveMoreShots {
+            // This is a workaround. http://stackoverflow.com/questions/18796891/uicollectionview-reloaddata-not-functioning-properly-in-ios-7
+            dataSource.loadNextPageOfShots { _ in
+                DispatchQueue.main.async {
+                    let numRows = collectionView.numberOfItems(inSection: 0)
+                    let numOfNewPaths = abs(self.dataSource.shots.count - numRows)
+                    var newIndexPaths: [IndexPath] = []
+                    for index in 0..<numOfNewPaths {
+                        newIndexPaths.append(IndexPath(item: numRows + index, section: 0))
+                    }
+                    collectionView.reloadData()
+                }
+            }
+        }
+    }
+    
     // MARK: - Categories
     
     @objc private func segmentedControlChanged(_ control: UISegmentedControl) {
@@ -198,31 +215,26 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
     // MARK: - ShotsCarouselViewControllerDataSource
     
     func shotBefore(shot: DribbbleShot, in: ShotsCarouselViewController) -> DribbbleShot? {
-        if let shotIndex = dataSource.shots.index(of: shot),
-            shotIndex - 1 >= 0 {
-            let previousShot = dataSource.shots[shotIndex - 1]
-            return previousShot
-        }
-        return nil
+        guard let shotIndex = dataSource.shots.index(of: shot),
+            let previousShot = dataSource.shots.element(before: shotIndex) else { return nil }
+        scroll(to: previousShot)
+        return previousShot
     }
     
     func shotAfter(shot: DribbbleShot, in: ShotsCarouselViewController) -> DribbbleShot? {
-        if let shotIndex = dataSource.shots.index(of: shot),
-        shotIndex + 1 < dataSource.shots.count {
-            let nextShot = dataSource.shots[shotIndex + 1]
-            return nextShot
-        }
-        return nil
+        guard let shotIndex = dataSource.shots.index(of: shot),
+            let nextShot = dataSource.shots.element(after: shotIndex) else { return nil }
+        retrieveNewShots(forShotIndex: shotIndex)
+        scroll(to: nextShot)
+        return nextShot
     }
     
     func placeholderImage(for shot: DribbbleShot, in: ShotsCarouselViewController) -> UIImage? {
-        if let shotIndex = dataSource.shots.index(of: shot) {
-            let indexPath = IndexPath(row: shotIndex, section: 0)
-            let cell = (collectionView?.cellForItem(at: indexPath) as? ShotCollectionCell)
-            let placeholderImage = cell?.imageView.image
-            return placeholderImage
-        }
-        return nil
+        guard let shotIndex = dataSource.shots.index(of: shot) else { return nil }
+        let indexPath = IndexPath(row: shotIndex, section: 0)
+        let cell = collectionView?.cellForItem(at: indexPath) as? ShotCollectionCell
+        let placeholderImage = cell?.imageView.image
+        return placeholderImage
     }
     
     // MARK: - Collection Layout & ShotsLayoutManagerDelegate
