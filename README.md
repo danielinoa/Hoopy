@@ -24,7 +24,7 @@ To get started and run the app, you need to follow these simple steps:
 
 ## Compatibility
 
-* This project is written in Swift 3.0 and requires Xcode 8 to build and run.
+* This project is written in Swift 3.0+ and requires Xcode 8+ to build and run.
 * Hoopy runs on iOS 10+.
 
 ## Dependencies
@@ -41,10 +41,9 @@ To get started and run the app, you need to follow these simple steps:
 
 ## Contributing to Hoopy
 
-Contributions to Hoopy are more than welcomed! Feel free to fork and open a pull request. 
-Please make your changes in a specific branch and request to pull into `master`.
+Contributions to Hoopy are more than welcome! Feel free to fork and open a pull request. 
+Please make your changes in a separate branch and request to pull into `master`.
 
 ## License
 
 Hoopy is under the MIT License.
-(Any credit would be appreciated in case you release a derivative of Hoopy)
