@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -57,7 +57,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0mX-wj-YEH" customClass="ExtendedHitButton" customModule="Hoopy" customModuleProvider="target">
-                    <rect key="frame" x="343" y="631" width="24" height="24"/>
+                    <rect key="frame" x="343" y="633" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="24" id="QSM-Qb-HJK"/>
                         <constraint firstAttribute="height" constant="24" id="vvv-SI-pse"/>
@@ -86,7 +86,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="zFE-Cz-je1" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="279-GT-kch"/>
-                <constraint firstAttribute="bottom" secondItem="0mX-wj-YEH" secondAttribute="bottom" constant="12" id="4Fo-50-F8O"/>
+                <constraint firstAttribute="bottom" secondItem="0mX-wj-YEH" secondAttribute="bottom" constant="10" id="4Fo-50-F8O"/>
                 <constraint firstItem="qf6-sV-S9F" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="5" id="AoR-IT-tqc"/>
                 <constraint firstItem="zFE-Cz-je1" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="XvW-5Z-VAF"/>
                 <constraint firstItem="zFE-Cz-je1" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hIt-1D-zaP"/>
@@ -99,6 +99,6 @@
     </objects>
     <resources>
         <image name="action" width="50" height="50"/>
-        <image name="heart-filled" width="50" height="50"/>
+        <image name="heart-filled" width="22" height="21"/>
     </resources>
 </document>

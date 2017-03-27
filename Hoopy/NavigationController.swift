@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NavigationController: UINavigationController {
+final class NavigationController: UINavigationController {
 
     // MARK: - Lifecycle
     
@@ -28,6 +28,34 @@ class NavigationController: UINavigationController {
     
     private var rootViewController: UIViewController {
         return ShotsViewController()
+    }
+    
+    // MARK: - Shortcut Items
+    
+    func handle(shortcutItem: UIApplicationShortcutItem, completion: ((Bool) -> Void)? = nil) {
+        guard let type = ShortcutItemType(rawValue: shortcutItem.type) else {
+            completion?(false)
+            return
+        }
+        
+        popToRootViewController(animated: false)
+        dismiss(animated: false, completion: nil)
+        
+        switch type {
+        case .favorites:
+            let favoritesViewController = FavoritesViewController()
+            show(favoritesViewController, sender: self)
+            completion?(true)
+        case .settings:
+            // FIXME: view controller is not being presented unless there is a delay.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                let settingsViewController = SettingsViewController()
+                settingsViewController.modalPresentationStyle = .overCurrentContext
+                self.present(settingsViewController, animated: false) {
+                    completion?(true)
+                }
+            }
+        }
     }
     
 }

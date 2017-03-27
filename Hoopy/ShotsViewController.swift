@@ -13,12 +13,12 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
     private lazy var favoritesBarButtonItem: UIBarButtonItem = {
         let heartImage = UIImage(named: "heart-filled")
         let item = UIBarButtonItem(image: heartImage, style: .plain, target: self, action: #selector(favoritesBarButtonTapped))
-        item.imageInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
         return item
     }()
     
     private lazy var settingsBarButtonItem: UIBarButtonItem = {
-        let item = UIBarButtonItem.init(title: "◉", style: .plain, target: self, action: #selector(settingsBarButtonTapped))
+        let image = UIImage(named: "settings")
+        let item = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(settingsBarButtonTapped))
         return item
     }()
     

@@ -12,6 +12,7 @@
 		01138E931D8CE84F00DD1748 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01138E921D8CE84F00DD1748 /* AppDelegate.swift */; };
 		01138E9A1D8CE84F00DD1748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01138E991D8CE84F00DD1748 /* Assets.xcassets */; };
 		01138E9D1D8CE84F00DD1748 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01138E9B1D8CE84F00DD1748 /* LaunchScreen.storyboard */; };
+		01165CF51E887DA600466F34 /* ShortcutItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01165CF41E887DA600466F34 /* ShortcutItemType.swift */; };
 		0117E61E1D8E1052006A6266 /* ShotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0117E61D1D8E1052006A6266 /* ShotViewController.swift */; };
 		0117E6201D8E2DD1006A6266 /* ExtendedHitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0117E61F1D8E2DD1006A6266 /* ExtendedHitButton.swift */; };
 		011D4D101D90DB9B00CAC6F5 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011D4D0F1D90DB9B00CAC6F5 /* FavoritesViewController.swift */; };
@@ -42,6 +43,7 @@
 		01138E991D8CE84F00DD1748 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01138E9C1D8CE84F00DD1748 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01138E9E1D8CE84F00DD1748 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01165CF41E887DA600466F34 /* ShortcutItemType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutItemType.swift; sourceTree = "<group>"; };
 		0117E61D1D8E1052006A6266 /* ShotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotViewController.swift; sourceTree = "<group>"; };
 		0117E61F1D8E2DD1006A6266 /* ExtendedHitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedHitButton.swift; sourceTree = "<group>"; };
 		011D4D0F1D90DB9B00CAC6F5 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				01138E921D8CE84F00DD1748 /* AppDelegate.swift */,
 				0107E8D51DD4FFCC00916707 /* NavigationController.swift */,
+				01165CF41E887DA600466F34 /* ShortcutItemType.swift */,
 				0117E61B1D8E0916006A6266 /* View Controllers */,
 				0117E61C1D8E0923006A6266 /* Views */,
 				0122BAA81D8CFFF2001DE708 /* Extensions */,
@@ -324,6 +327,7 @@
 				01138E931D8CE84F00DD1748 /* AppDelegate.swift in Sources */,
 				01802ADD1D8CFBD7002AE659 /* DribbbleShot.swift in Sources */,
 				0107E8D61DD4FFCC00916707 /* NavigationController.swift in Sources */,
+				01165CF51E887DA600466F34 /* ShortcutItemType.swift in Sources */,
 				01721F321D97625A00F9DA81 /* ShotsSortCategory.swift in Sources */,
 				011D4D101D90DB9B00CAC6F5 /* FavoritesViewController.swift in Sources */,
 				0122BAA61D8CFFEE001DE708 /* UIColorExtensions.swift in Sources */,

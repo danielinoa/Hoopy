@@ -87,6 +87,7 @@ final class ShotsCarouselViewController: UIViewController, UIPageViewControllerD
         if let shotViewController = (pageViewController.viewControllers?.first as? ShotViewController) {
             let imageName = "heart-\(shotViewController.dribbbleShot.isFavorited ? "filled" : "empty")"
             favoriteButton.setImage(UIImage(named: imageName), for: .normal)
+            favoriteButton.imageEdgeInsets = UIEdgeInsets(top: 3, left: 2, bottom: 3, right: 2)
         }
     }
     
