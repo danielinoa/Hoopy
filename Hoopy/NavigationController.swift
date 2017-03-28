@@ -26,9 +26,7 @@ final class NavigationController: UINavigationController {
 
     // MARK: - View Controllers
     
-    private var rootViewController: UIViewController {
-        return ShotsViewController()
-    }
+    private let rootViewController = ShotsViewController()
     
     // MARK: - Shortcut Items
     

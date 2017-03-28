@@ -76,7 +76,7 @@ struct DribbbleShot: CustomDebugStringConvertible, Hashable {
     // MARK: - CustomDebugStringConvertible
     
     var debugDescription: String {
-        return "\(title)"
+        return title ?? "No description available for \(self)"
     }
     
     // MARK: - Hashable

@@ -55,6 +55,10 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
         return categories
     }()
     
+    private var shots: [DribbbleShot] {
+        return dataSource.shots
+    }
+    
     private func reloadDataSources() {
         dataSource = dataSources[segmentedControl.selectedSegmentIndex]
         dataSources.forEach({ dataSource in
@@ -114,7 +118,7 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
     }
     
     private func scroll(to shot: DribbbleShot) {
-        guard let shotIndex = dataSource.shots.index(of: shot) else { return }
+        guard let shotIndex = shots.index(of: shot) else { return }
         let shotIndexPath = IndexPath(row: shotIndex, section: 0)
         collectionView?.scrollToItem(at: shotIndexPath, at: .bottom, animated: true)
     }
@@ -139,8 +143,8 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
             fatalError()
         }
         // Make sure the current row exists within the number of shots, in case the dataSource changes asynchronously.
-        if indexPath.row < dataSource.shots.count {
-            let shot = dataSource.shots[indexPath.row]
+        if indexPath.row < shots.count {
+            let shot = shots[indexPath.row]
             collectionCell.configure(with: shot)
         }
         return collectionCell
@@ -155,7 +159,7 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let shot = dataSource.shots[indexPath.row]
+        let shot = shots[indexPath.row]
         
         let cell = (collectionView.cellForItem(at: indexPath) as? ShotCollectionCell)
         let placeholderImage = cell?.imageView.image
@@ -185,13 +189,13 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
      Retrieves and inserts new shots in the collection.
      */
     private func retrieveNewShots(forShotIndex index: Int) {
-        let shouldRetrieveMoreShots = index >= dataSource.shots.count - 4
+        let shouldRetrieveMoreShots = index >= shots.count - 4
         if let collectionView = collectionView, shouldRetrieveMoreShots {
             // This is a workaround. http://stackoverflow.com/questions/18796891/uicollectionview-reloaddata-not-functioning-properly-in-ios-7
             dataSource.loadNextPageOfShots { _ in
                 DispatchQueue.main.async {
                     let numRows = collectionView.numberOfItems(inSection: 0)
-                    let numOfNewPaths = abs(self.dataSource.shots.count - numRows)
+                    let numOfNewPaths = abs(self.shots.count - numRows)
                     var newIndexPaths: [IndexPath] = []
                     for index in 0..<numOfNewPaths {
                         newIndexPaths.append(IndexPath(item: numRows + index, section: 0))
@@ -215,15 +219,15 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
     // MARK: - ShotsCarouselViewControllerDataSource
     
     func shotBefore(shot: DribbbleShot, in: ShotsCarouselViewController) -> DribbbleShot? {
-        guard let shotIndex = dataSource.shots.index(of: shot),
-            let previousShot = dataSource.shots.element(before: shotIndex) else { return nil }
+        guard let shotIndex = shots.index(of: shot),
+            let previousShot = shots.element(before: shotIndex) else { return nil }
         scroll(to: previousShot)
         return previousShot
     }
     
     func shotAfter(shot: DribbbleShot, in: ShotsCarouselViewController) -> DribbbleShot? {
-        guard let shotIndex = dataSource.shots.index(of: shot),
-            let nextShot = dataSource.shots.element(after: shotIndex) else { return nil }
+        guard let shotIndex = shots.index(of: shot),
+            let nextShot = shots.element(after: shotIndex) else { return nil }
         retrieveNewShots(forShotIndex: shotIndex)
         scroll(to: nextShot)
         return nextShot

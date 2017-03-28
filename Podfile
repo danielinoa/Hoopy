@@ -6,7 +6,7 @@ target 'Hoopy' do
   use_frameworks!
 
   # Pods for Hoopy
-    pod 'Alamofire', '~> 4.0'
+    pod 'Alamofire', '~> 4.4'
     pod 'AlamofireImage', '~> 3.0'
     pod 'FLAnimatedImage', '~> 1.0'
     pod 'TUSafariActivity', '~> 1.0'
