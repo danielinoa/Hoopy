@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad12_9" orientation="landscape">
+        <adaptation id="splitview1_2"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,19 +20,21 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="678" height="1024"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFE-Cz-je1">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="678" height="1024"/>
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="9wp-un-FRw">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="678" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <blurEffect style="dark"/>
                 </visualEffectView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qf6-sV-S9F" customClass="ExtendedHitButton" customModule="Hoopy" customModuleProvider="target">
-                    <rect key="frame" x="182.5" y="633" width="20" height="20"/>
+                    <rect key="frame" x="334" y="990" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="E6B-l7-X7J"/>
                     </constraints>
@@ -57,7 +59,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0mX-wj-YEH" customClass="ExtendedHitButton" customModule="Hoopy" customModuleProvider="target">
-                    <rect key="frame" x="343" y="633" width="24" height="24"/>
+                    <rect key="frame" x="646" y="990" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="24" id="QSM-Qb-HJK"/>
                         <constraint firstAttribute="height" constant="24" id="vvv-SI-pse"/>
@@ -83,18 +85,38 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="zFE-Cz-je1" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="279-GT-kch"/>
                 <constraint firstAttribute="bottom" secondItem="0mX-wj-YEH" secondAttribute="bottom" constant="10" id="4Fo-50-F8O"/>
+                <constraint firstAttribute="trailingMargin" secondItem="qf6-sV-S9F" secondAttribute="trailing" id="6ic-Kb-jf0"/>
                 <constraint firstItem="qf6-sV-S9F" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="5" id="AoR-IT-tqc"/>
                 <constraint firstItem="zFE-Cz-je1" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="XvW-5Z-VAF"/>
+                <constraint firstItem="qf6-sV-S9F" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="eok-8n-qxu"/>
                 <constraint firstItem="zFE-Cz-je1" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hIt-1D-zaP"/>
                 <constraint firstItem="qf6-sV-S9F" firstAttribute="width" secondItem="qf6-sV-S9F" secondAttribute="height" multiplier="1:1" id="hns-Fq-fSp"/>
                 <constraint firstItem="zFE-Cz-je1" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="iIR-fr-gb6"/>
                 <constraint firstAttribute="bottom" secondItem="qf6-sV-S9F" secondAttribute="bottom" constant="14" id="uFD-Hc-jfU"/>
                 <constraint firstAttribute="trailingMargin" secondItem="0mX-wj-YEH" secondAttribute="trailing" id="xah-Mx-C9m"/>
             </constraints>
+            <variation key="widthClass=regular">
+                <mask key="constraints">
+                    <exclude reference="AoR-IT-tqc"/>
+                    <exclude reference="uFD-Hc-jfU"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=compact-widthClass=compact">
+                <mask key="constraints">
+                    <exclude reference="AoR-IT-tqc"/>
+                    <exclude reference="uFD-Hc-jfU"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="constraints">
+                    <exclude reference="6ic-Kb-jf0"/>
+                    <exclude reference="eok-8n-qxu"/>
+                </mask>
+            </variation>
         </view>
     </objects>
     <resources>

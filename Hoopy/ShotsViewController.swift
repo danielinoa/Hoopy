@@ -194,12 +194,6 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
             // This is a workaround. http://stackoverflow.com/questions/18796891/uicollectionview-reloaddata-not-functioning-properly-in-ios-7
             dataSource.loadNextPageOfShots { _ in
                 DispatchQueue.main.async {
-                    let numRows = collectionView.numberOfItems(inSection: 0)
-                    let numOfNewPaths = abs(self.shots.count - numRows)
-                    var newIndexPaths: [IndexPath] = []
-                    for index in 0..<numOfNewPaths {
-                        newIndexPaths.append(IndexPath(item: numRows + index, section: 0))
-                    }
                     collectionView.reloadData()
                 }
             }
@@ -248,6 +242,11 @@ final class ShotsViewController: UICollectionViewController, ShotsCarouselViewCo
     }
     
     func shotsLayoutManagerDidChangeLayout(manager: ShotsLayoutManager) {
+        collectionView?.collectionViewLayout.invalidateLayout()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         collectionView?.collectionViewLayout.invalidateLayout()
     }
     

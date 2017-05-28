@@ -81,6 +81,11 @@ final class ShotsCarouselViewController: UIViewController, UIPageViewControllerD
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        pageViewController.view.frame = visualEffectView.frame
+    }
+    
     // MARK: - 
     
     private func configureFavoriteButton() {
